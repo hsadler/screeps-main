@@ -1,14 +1,15 @@
 
 var ctrlCreep = {
 
+
     SHOW_MESSAGES: false,
 
-    init: function() {
-        if(this.SHOW_MESSAGES) {
-            this.show_messages();
-        }
+
+    proc: function() {
+        if(this.SHOW_MESSAGES) this.show_messages();
         this.clearDeadCreepFromMemory();
     },
+
 
     show_messages: function() {
         for(var name in Game.creeps) {
@@ -22,6 +23,7 @@ var ctrlCreep = {
         }
     },
 
+
     clearDeadCreepFromMemory: function() {
         for(var name in Memory.creeps) {
             if(!Game.creeps[name]) {
@@ -30,6 +32,7 @@ var ctrlCreep = {
             }
         }
     }
+
 
 };
 

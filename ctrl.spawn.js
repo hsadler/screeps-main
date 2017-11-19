@@ -11,13 +11,13 @@ var roleBuilder = require('role.builder');
 var ctrlSpawn = {
 
 
-    init: function() {
-        this.handleCreepSpawn();
+    proc: function() {
+        this.spawnCreep();
         this.show_messages();
     },
 
 
-    handleCreepSpawn: function() {
+    spawnCreep: function() {
 
         // get current list of harvesters
         var harvesters = _.filter(Game.creeps, function(creep) {
