@@ -28,10 +28,14 @@ module.exports.loop = function() {
     // get construction site list
     var spawn = Game.spawns['Spawn1'];
     var room = spawn.room;
-    var constructionSites = room.find(FIND_MY_CONSTRUCTION_SITES);
+    var extensionConstrSites = room.find(FIND_MY_CONSTRUCTION_SITES, {
+        filter: function(structure) {
+            return structure.structureType === STRUCTURE_EXTENSION;
+        }
+    });
 
     // create more if not at max amount
-    if(constructionSites.length < conf.MAX_EXTENTION_CONSTRUCTION_SITES) {
+    if(extensionConstrSites.length < conf.MAX_EXTENTION_CONSTRUCTION_SITES) {
         var maxDistanceFromSpawn = 6;
         var minX = spawn.pos.x - maxDistanceFromSpawn;
         var minY = spawn.pos.y - maxDistanceFromSpawn;
