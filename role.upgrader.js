@@ -27,9 +27,11 @@ var roleUpgrader = {
         }
         else {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+            // TODO REFACTOR: temporary way to split energy nodes
+            var sourceToHarvest = sources.length > 1 ? sources[1] : sources[0];
+            if(creep.harvest(sourceToHarvest) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(
-                    sources[0],
+                    sourceToHarvest,
                     {visualizePathStyle: {stroke: '#ffaa00'}}
                 );
             }

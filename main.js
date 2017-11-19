@@ -1,5 +1,6 @@
 
 var conf = require('conf');
+var utils = require('utils');
 
 // controllers
 var ctrlSpawn = require('ctrl.spawn');
@@ -24,20 +25,24 @@ module.exports.loop = function() {
     // TODO: create construction sites
         // (move to a room controller or contruction site controller later)
 
-    var chooseExtensionConstrSiteCoords = function() {
-        // LEFT OFF HERE...
-    };
-
     // get construction site list
-    var room = Game.spawns['Spawn1'].room;
+    var spawn = Game.spawns['Spawn1'];
+    var room = spawn.room;
     var constructionSites = room.find(FIND_MY_CONSTRUCTION_SITES);
 
     // create more if not at max amount
     if(constructionSites.length < conf.MAX_EXTENTION_CONSTRUCTION_SITES) {
-        // room.createConstructionSite(
-
-        //     STRUCTURE_EXTENSION
-        // );
+        var maxDistanceFromSpawn = 6;
+        var minX = spawn.pos.x - maxDistanceFromSpawn;
+        var minY = spawn.pos.y - maxDistanceFromSpawn;
+        var maxX = spawn.pos.x + maxDistanceFromSpawn;
+        var maxY = spawn.pos.y + maxDistanceFromSpawn;
+        do {
+            var randX = utils.getRandomInt(minX, maxX);
+            var randY = utils.getRandomInt(minY, maxY);
+        } while(
+            room.createConstructionSite(randX, randY, STRUCTURE_EXTENSION) !== OK
+        );
     }
 
 
