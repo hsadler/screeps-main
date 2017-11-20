@@ -11,9 +11,25 @@ var roleBuilder = require('role.builder');
 var ctrlSpawn = {
 
 
+    // TODO: temp solution for upgrading
+    creepPartTemplate: [
+
+        WORK,
+        CARRY,
+        MOVE,
+        MOVE,
+
+        WORK,
+        CARRY,
+        // MOVE,
+        // MOVE,
+
+    ],
+
+
     proc: function() {
         this.spawnCreep();
-        this.show_messages();
+        this.displayGameInformation();
     },
 
 
@@ -38,7 +54,7 @@ var ctrlSpawn = {
         if(builders.length < conf.MAX_BUILDERS) {
             var creepName = 'b-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                [WORK,CARRY,MOVE],
+                this.creepPartTemplate,
                 creepName,
                 {memory: {role: 'builder'}}
             );
@@ -48,7 +64,7 @@ var ctrlSpawn = {
         if(upgraders.length < conf.MAX_UPGRADERS) {
             var creepName = 'u-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                [WORK,CARRY,MOVE],
+                this.creepPartTemplate,
                 creepName,
                 {memory: {role: 'upgrader'}}
             );
@@ -58,7 +74,7 @@ var ctrlSpawn = {
         if(harvesters.length < conf.MAX_HARVESTERS) {
             var creepName = 'h-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                [WORK,CARRY,MOVE],
+                this.creepPartTemplate,
                 creepName,
                 {memory: {role: 'harvester'}}
             );
@@ -92,13 +108,33 @@ var ctrlSpawn = {
     },
 
 
-    show_messages: function() {
-        Game.spawns['Spawn1'].room.visual.text(
-            'Game time: ' + Game.time,
-            Game.spawns['Spawn1'].pos.x,
-            Game.spawns['Spawn1'].pos.y + 2,
-            {align: 'center', opacity: 0.8}
-        );
+    displayGameInformation: function() {
+        var spawn = Game.spawns['Spawn1'];
+        spawn.room.visual
+            .text(
+                'Game time: ' + Game.time,
+                4,
+                spawn.pos.y - 5,
+                {align: 'left', opacity: 1}
+            )
+            .text(
+                'CPU limit: ' + Game.cpu.limit,
+                4,
+                spawn.pos.y - 4,
+                {align: 'left', opacity: 1}
+            )
+            .text(
+                'CPU tick limit: ' + Game.cpu.tickLimit,
+                4,
+                spawn.pos.y - 3,
+                {align: 'left', opacity: 1}
+            )
+            .text(
+                'CPU used: ' + Math.floor(Game.cpu.getUsed()),
+                4,
+                spawn.pos.y - 2,
+                {align: 'left', opacity: 1}
+            );
     }
 
 

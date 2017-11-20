@@ -15,13 +15,7 @@ module.exports.loop = function() {
     ctrlCreep.proc();
     ctrlConstruction.proc();
 
-    // TEST: suicide creep periodically
-    // if(harvesters.length === conf.MAX_HARVESTERS && Game.time % 25 === 0) {
-    //     harvesters[0].suicide();
-    // }
-
-    // TEST: suicide all creeps
-    // for(var name in Game.creeps) Game.creeps[name].suicide();
+    // TODO: build and test new info system here..
 
 };
 

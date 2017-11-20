@@ -15,7 +15,7 @@ var ctrlCreep = {
         for(var name in Game.creeps) {
             var creep = Game.creeps[name];
             creep.room.visual.text(
-                creep.name,
+                creep.memory.role,
                 creep.pos.x,
                 creep.pos.y + 1,
                 {align: 'center', opacity: 0.8}

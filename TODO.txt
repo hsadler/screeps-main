@@ -1,18 +1,21 @@
 
+better game info display
+    - move to corner of room
+    - bool constant for toggle
+    - info:
+        1. Game time (ticks)
+        2. Avail CPU
+        3. Used CPU
+        4. Summary of creep information: count, upgrades
+        5. Summary of energy information: harvest/min, storage
+
 upgrade creeps
     - stub methods, interfaces
     - implement naive solution
     - suicide inferior creeps?
 
-better game info display
-    - move to corner of room
-    - bool constant for toggle
-    - info:
-        1. Ticks
-        2. Avail CPU
-        3. Used CPU
-        4. Summary of creep information: count, upgrades
-        5. Summary of energy information: harvest/min, storage
+spawn general creeps with dynamic assignable role system
+
 
 handle idle creeps
     - flag system
