@@ -1,0 +1,21 @@
+
+
+RESOURCES:
+
+
+game api
+http://docs.screeps.com/api/
+
+creep body part calculator
+https://codepen.io/findoff/full/RPmqOd
+
+screeps wiki
+http://screeps.wikia.com/wiki/Screeps_Wiki
+
+screeps reddit
+https://www.reddit.com/r/screeps/
+
+tutorial vids
+https://www.youtube.com/playlist?list=PL0EZQ169YGlor5rzeJEYYPE3tGYT2zGT2
+
+
