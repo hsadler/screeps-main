@@ -24,6 +24,11 @@ var ctrlSpawn = {
         MOVE,
         MOVE,
 
+        WORK,
+        CARRY,
+        MOVE,
+        MOVE,
+
         // WORK,
         // CARRY,
         // MOVE,
