@@ -121,9 +121,35 @@ var ctrlSpawn = {
 
 
     displayGameInformation: function() {
+
         var spawn = Game.spawns['Spawn1'];
         var xPos = 4;
         var infoStyle = {align: 'left', opacity: 0.8};
+
+        var extensionStructures = spawn.room.find(FIND_STRUCTURES, {
+            filter: function(structure) {
+                return structure.structureType === STRUCTURE_EXTENSION;
+            }
+        });
+
+        var getTotalEnergyCapacity = function() {
+            var sum = 0;
+            sum += spawn.energyCapacity;
+            extensionStructures.forEach(function(extension) {
+                sum += extension.energyCapacity;
+            });
+            return sum;
+        };
+
+        var getTotalStoredEnergy = function() {
+            var sum = 0;
+            sum += spawn.energy;
+            extensionStructures.forEach(function(extension) {
+                sum += extension.energy;
+            });
+            return sum;
+        };
+
         spawn.room.visual
 
             // game ticks
@@ -164,23 +190,18 @@ var ctrlSpawn = {
                 xPos, spawn.pos.y + 4, infoStyle
             )
 
-            // TODO: implement
             // energy info
             .text(
-                'Total creeps: ' + Object.keys(Game.creeps).length,
+                'Energy capacity: ' + getTotalEnergyCapacity(),
                 xPos, spawn.pos.y + 6, infoStyle
             )
             .text(
-                'Harvesters: ' + this.harvesters.length,
+                'Energy Stored: ' + getTotalStoredEnergy(),
                 xPos, spawn.pos.y + 7, infoStyle
             )
             .text(
-                'Upgraders: ' + this.upgraders.length,
+                'Harvest rate: coming soon...',
                 xPos, spawn.pos.y + 8, infoStyle
-            )
-            .text(
-                'Builders: ' + this.builders.length,
-                xPos, spawn.pos.y + 9, infoStyle
             );
 
     }

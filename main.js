@@ -15,8 +15,6 @@ module.exports.loop = function() {
     ctrlCreep.proc();
     ctrlConstruction.proc();
 
-    // TODO: build and test new info system here..
-
 };
 
 
