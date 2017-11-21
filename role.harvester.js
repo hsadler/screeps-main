@@ -1,6 +1,10 @@
+var conf = require('conf');
+
+
 var roleHarvester = {
 
     run: function(creep) {
+        // harvest from node
         if(creep.carry.energy < creep.carryCapacity) {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
@@ -10,7 +14,9 @@ var roleHarvester = {
                 );
             }
         }
+        // transport to base
         else {
+            // get targets with available capacity
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (
@@ -19,6 +25,7 @@ var roleHarvester = {
                     ) && structure.energy < structure.energyCapacity;
                 }
             });
+            // target with capacity exists
             if(targets.length > 0) {
                 if(
                     creep.transfer(targets[0], RESOURCE_ENERGY) ==
@@ -29,6 +36,13 @@ var roleHarvester = {
                         {visualizePathStyle: {stroke: '#ffffff'}}
                     );
                 }
+            }
+            // move to idle flag
+            else {
+                creep.moveTo(
+                    Game.flags[conf.IDLE_CREEP_FLAG],
+                    {visualizePathStyle: {stroke: '#ffffff'}}
+                );
             }
         }
     }
