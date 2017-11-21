@@ -33,30 +33,37 @@ var ctrlSpawn = {
 
 
     proc: function() {
+        this.init();
         this.spawnCreep();
         this.displayGameInformation();
     },
 
 
-    spawnCreep: function() {
+    // for setting data per tick or saving to memory
+    init: function() {
 
         // get current list of harvesters
-        var harvesters = _.filter(Game.creeps, function(creep) {
+        this.harvesters = _.filter(Game.creeps, function(creep) {
             return creep.memory.role == 'harvester';
         });
 
         // get current list of updgraders
-        var upgraders = _.filter(Game.creeps, function(creep) {
+        this.upgraders = _.filter(Game.creeps, function(creep) {
             return creep.memory.role == 'upgrader';
         });
 
         // get current list of builders
-        var builders = _.filter(Game.creeps, function(creep) {
+        this.builders = _.filter(Game.creeps, function(creep) {
             return creep.memory.role == 'builder';
         });
 
+    },
+
+
+    spawnCreep: function() {
+
         // spawn builders if needed (priority 3)
-        if(builders.length < conf.MAX_BUILDERS) {
+        if(this.builders.length < conf.MAX_BUILDERS) {
             var creepName = 'b-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 this.creepPartTemplate,
@@ -66,7 +73,7 @@ var ctrlSpawn = {
         }
 
         // spawn upgraders if needed (priority 2)
-        if(upgraders.length < conf.MAX_UPGRADERS) {
+        if(this.upgraders.length < conf.MAX_UPGRADERS) {
             var creepName = 'u-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 this.creepPartTemplate,
@@ -76,7 +83,7 @@ var ctrlSpawn = {
         }
 
         // spawn harvesters if needed (priority 1)
-        if(harvesters.length < conf.MAX_HARVESTERS) {
+        if(this.harvesters.length < conf.MAX_HARVESTERS) {
             var creepName = 'h-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 this.creepPartTemplate,
@@ -115,31 +122,67 @@ var ctrlSpawn = {
 
     displayGameInformation: function() {
         var spawn = Game.spawns['Spawn1'];
+        var xPos = 4;
+        var infoStyle = {align: 'left', opacity: 0.8};
         spawn.room.visual
+
+            // game ticks
             .text(
                 'Game time: ' + Game.time,
-                4,
-                spawn.pos.y - 5,
-                {align: 'left', opacity: 1}
+                xPos, spawn.pos.y - 5, infoStyle
             )
+
+            // cpu info
             .text(
                 'CPU limit: ' + Game.cpu.limit,
-                4,
-                spawn.pos.y - 4,
-                {align: 'left', opacity: 1}
+                xPos, spawn.pos.y - 3, infoStyle
             )
             .text(
                 'CPU tick limit: ' + Game.cpu.tickLimit,
-                4,
-                spawn.pos.y - 3,
-                {align: 'left', opacity: 1}
+                xPos, spawn.pos.y - 2, infoStyle
             )
             .text(
                 'CPU used: ' + Math.floor(Game.cpu.getUsed()),
-                4,
-                spawn.pos.y - 2,
-                {align: 'left', opacity: 1}
+                xPos, spawn.pos.y - 1, infoStyle
+            )
+
+            // creep info
+            .text(
+                'Total creeps: ' + Object.keys(Game.creeps).length,
+                xPos, spawn.pos.y + 1, infoStyle
+            )
+            .text(
+                'Harvesters: ' + this.harvesters.length,
+                xPos, spawn.pos.y + 2, infoStyle
+            )
+            .text(
+                'Upgraders: ' + this.upgraders.length,
+                xPos, spawn.pos.y + 3, infoStyle
+            )
+            .text(
+                'Builders: ' + this.builders.length,
+                xPos, spawn.pos.y + 4, infoStyle
+            )
+
+            // TODO: implement
+            // energy info
+            .text(
+                'Total creeps: ' + Object.keys(Game.creeps).length,
+                xPos, spawn.pos.y + 6, infoStyle
+            )
+            .text(
+                'Harvesters: ' + this.harvesters.length,
+                xPos, spawn.pos.y + 7, infoStyle
+            )
+            .text(
+                'Upgraders: ' + this.upgraders.length,
+                xPos, spawn.pos.y + 8, infoStyle
+            )
+            .text(
+                'Builders: ' + this.builders.length,
+                xPos, spawn.pos.y + 9, infoStyle
             );
+
     }
 
 

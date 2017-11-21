@@ -14,8 +14,20 @@ upgrade creeps
     - implement naive solution
     - suicide inferior creeps?
 
+handle idle creeps
+ideas:
+    - flag system (idle creeps move to flag so that energy nodes are not blocked)
+    - role system (idle creeps are given a new role)
+
 spawn general creeps with dynamic assignable role system
 
+road building
 
-handle idle creeps
-    - flag system
+tower building and logic
+
+capture and control of another room
+    - creep scout
+    - capture
+    - multi-room logic (refactor from single-room)
+
+
