@@ -11,32 +11,6 @@ var roleBuilder = require('role.builder');
 var ctrlSpawn = {
 
 
-    // TODO: temp solution for upgrading
-    creepPartTemplate: [
-
-        WORK,
-        CARRY,
-        MOVE,
-        MOVE,
-
-        WORK,
-        CARRY,
-        MOVE,
-        MOVE,
-
-        WORK,
-        CARRY,
-        MOVE,
-        MOVE,
-
-        // WORK,
-        // CARRY,
-        // MOVE,
-        // MOVE,
-
-    ],
-
-
     proc: function() {
         this.init();
         this.spawnCreep();
@@ -71,7 +45,7 @@ var ctrlSpawn = {
         if(this.builders.length < conf.MAX_BUILDERS) {
             var creepName = 'b-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                this.creepPartTemplate,
+                conf.CREEP_TEMPLATE,
                 creepName,
                 {memory: {role: 'builder'}}
             );
@@ -81,7 +55,7 @@ var ctrlSpawn = {
         if(this.upgraders.length < conf.MAX_UPGRADERS) {
             var creepName = 'u-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                this.creepPartTemplate,
+                conf.CREEP_TEMPLATE,
                 creepName,
                 {memory: {role: 'upgrader'}}
             );
@@ -91,7 +65,7 @@ var ctrlSpawn = {
         if(this.harvesters.length < conf.MAX_HARVESTERS) {
             var creepName = 'h-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                this.creepPartTemplate,
+                conf.CREEP_TEMPLATE,
                 creepName,
                 {memory: {role: 'harvester'}}
             );
