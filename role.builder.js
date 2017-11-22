@@ -1,12 +1,16 @@
+var conf = require('conf');
+
 
 var roleBuilder = {
 
     run: function(creep) {
 
+        // ran out of energy while building
         if(creep.memory.building && creep.carry.energy == 0) {
             creep.memory.building = false;
             creep.say('🔄 harvest');
         }
+        // at max energy capacity
         if(
             !creep.memory.building &&
             creep.carry.energy == creep.carryCapacity
@@ -15,9 +19,11 @@ var roleBuilder = {
             creep.say('🚧 build');
         }
 
+        // build mode
         if(creep.memory.building) {
             var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            if(targets.length) {
+            // construction sites need building
+            if(targets.length > 0) {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(
                         targets[0],
@@ -25,7 +31,15 @@ var roleBuilder = {
                     );
                 }
             }
+            // move to idle flag
+            else {
+                creep.moveTo(
+                    Game.flags[conf.IDLE_CREEP_FLAG],
+                    {visualizePathStyle: {stroke: '#ffffff'}}
+                );
+            }
         }
+        // harvest mode
         else {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
@@ -35,6 +49,7 @@ var roleBuilder = {
                 );
             }
         }
+
     }
 };
 
