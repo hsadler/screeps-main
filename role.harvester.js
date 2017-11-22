@@ -1,21 +1,29 @@
+
 var conf = require('conf');
 
+
+// GOVERNS HARVESTER BEHAVIOR
 
 var roleHarvester = {
 
     run: function(creep) {
-        // harvest from node
-        if(creep.carry.energy < creep.carryCapacity) {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(
-                    sources[0],
-                    {visualizePathStyle: {stroke: '#ffaa00'}}
-                );
-            }
+
+        // ran out of energy while delivering, change to harvest mode
+        if(creep.memory.delivering && creep.carry.energy == 0) {
+            creep.memory.delivering = false;
+            creep.say('🔄 harvest');
         }
-        // transport to base
-        else {
+        // reached max energy capacity while harvesting, change to deliver mode
+        if(
+            !creep.memory.delivering &&
+            creep.carry.energy == creep.carryCapacity
+        ) {
+            creep.memory.delivering = true;
+            creep.say('⚡ deliver');
+        }
+
+        // delivering mode
+        if(creep.memory.delivering) {
             // get targets with available capacity
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -45,8 +53,21 @@ var roleHarvester = {
                 );
             }
         }
+        // harvesting mode
+        else {
+            var sources = creep.room.find(FIND_SOURCES);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(
+                    sources[0],
+                    {visualizePathStyle: {stroke: '#ffaa00'}}
+                );
+            }
+        }
+
+
     }
 
 };
+
 
 module.exports = roleHarvester;

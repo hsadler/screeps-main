@@ -1,11 +1,18 @@
+
+
+// GOVERNS UPGRADER BEHAVIOR
+
 var roleUpgrader = {
+
 
     run: function(creep) {
 
+        // ran out of energy while upgrading, change to harvest mode
         if(creep.memory.upgrading && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
             creep.say('🔄 harvest');
 	    }
+        // reached max energy capacity while harvesting, change to upgrade mode
 	    if(
             !creep.memory.upgrading &&
             creep.carry.energy == creep.carryCapacity
@@ -14,6 +21,7 @@ var roleUpgrader = {
 	        creep.say('⚡ upgrade');
 	    }
 
+        // upgrading mode
 	    if(creep.memory.upgrading) {
             if(
                 creep.upgradeController(creep.room.controller) ==
@@ -25,6 +33,7 @@ var roleUpgrader = {
                 );
             }
         }
+        // harvesting mode
         else {
             var sources = creep.room.find(FIND_SOURCES);
             // TODO REFACTOR: temporary way to split energy nodes
@@ -36,8 +45,11 @@ var roleUpgrader = {
                 );
             }
         }
+
 	}
 
+
 };
+
 
 module.exports = roleUpgrader;

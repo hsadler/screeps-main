@@ -1,6 +1,8 @@
 var conf = require('conf');
 
 
+// GOVERNS BUILDER BEHAVIOR
+
 var roleBuilder = {
 
     run: function(creep) {
