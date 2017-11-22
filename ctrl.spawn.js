@@ -14,7 +14,7 @@ var ctrlSpawn = {
     proc: function() {
         this.init();
         this.spawnCreep();
-        this.displayGameInformation();
+        if(conf.DISPLAY_GAME_INFO) this.displayGameInformation();
     },
 
 

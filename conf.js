@@ -3,15 +3,15 @@ var conf = {
 
 
     // creep
-    MAX_HARVESTERS: 3,
-    MAX_UPGRADERS: 4,
-    MAX_BUILDERS: 2,
+    MAX_HARVESTERS: 5,
+    MAX_UPGRADERS: 5,
+    MAX_BUILDERS: 0,
 
     CREEP_TEMPLATE: [
         WORK,CARRY,MOVE,MOVE,
-        WORK,CARRY,MOVE,MOVE,
-        WORK,CARRY,MOVE,MOVE,
-        WORK,CARRY,MOVE,MOVE,
+        // WORK,CARRY,MOVE,MOVE,
+        // WORK,CARRY,MOVE,MOVE,
+        // WORK,CARRY,MOVE,MOVE,
     ],
 
 
@@ -20,7 +20,11 @@ var conf = {
 
 
     // flags
-    IDLE_CREEP_FLAG: 'idle'
+    IDLE_CREEP_FLAG: 'idle',
+
+
+    // display game information toggle
+    DISPLAY_GAME_INFO: true
 
 
 };

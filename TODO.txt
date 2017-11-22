@@ -1,22 +1,17 @@
 
 better game info display
-    - move to corner of room
-    - bool constant for toggle
-    - info:
-        1. Game time (ticks)
-        2. Avail CPU
-        3. Used CPU
-        4. Summary of creep information: count, upgrades
-        5. Summary of energy information: harvest/min, storage
+    X move to corner of room
+    X bool constant for toggle
+    - info: Summary of energy information: harvest/min, storage
 
-upgrade creeps
+evolve creeps
     - stub methods, interfaces
     - implement naive solution
     - suicide inferior creeps?
 
 handle idle creeps
 ideas:
-    - flag system (idle creeps move to flag so that energy nodes are not blocked)
+    X flag system (idle creeps move to flag so that energy nodes are not blocked)
     - role system (idle creeps are given a new role)
 
 spawn general creeps with dynamic assignable role system
