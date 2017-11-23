@@ -9,18 +9,28 @@ creep evolution system
     X implement naive solution
     - suicide inferior creeps?
 
-new role: miner
-
 handle idle creeps
 ideas:
     X flag system (idle creeps move to flag so that energy nodes are not blocked)
     - role system (idle creeps are given a new role)
 
-spawn general creeps with dynamic assignable role system
+new role: miner
+    - miner creep mines energy only
+    - miner creep has specialized part template
+    - alter the 'harvest' mode of other creeps to transfer from the miner creeps
+
+renew/recycle system for creeps
+
+analytics system - get insights into:
+    - harvest/tick
+    - storage/tick
+    - controller upgrade/tick
 
 road building
 
 tower building and logic
+
+DEFENSE, DEFENSE, DEFENSE
 
 capture and control of another room
     - creep scout
