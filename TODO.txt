@@ -5,8 +5,8 @@ better game info display
     - info: Summary of energy information: harvest/min, storage
 
 creep evolution system
-    - stub methods, interfaces
-    - implement naive solution
+    X stub methods, interfaces
+    X implement naive solution
     - suicide inferior creeps?
 
 new role: miner

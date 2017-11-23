@@ -16,6 +16,7 @@ module.exports.loop = function() {
 
     // model processes
     modelGame.proc();
+    modelCreep.proc();
 
     // controller processes
     ctrlSpawn.proc();

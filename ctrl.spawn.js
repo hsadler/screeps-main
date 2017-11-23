@@ -4,6 +4,7 @@ var conf = require('conf');
 
 // models
 var modelGame = require('model.game');
+var modelCreep = require('model.creep');
 
 // roles
 var roleHarvester = require('role.harvester');
@@ -48,7 +49,7 @@ var ctrlSpawn = {
         if(this.builders.length < conf.MAX_BUILDERS) {
             var creepName = 'b-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                conf.CREEP_TEMPLATE,
+                modelCreep.generalCreep,
                 creepName,
                 {memory: {role: 'builder'}}
             );
@@ -58,7 +59,7 @@ var ctrlSpawn = {
         if(this.upgraders.length < conf.MAX_UPGRADERS) {
             var creepName = 'u-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                conf.CREEP_TEMPLATE,
+                modelCreep.generalCreep,
                 creepName,
                 {memory: {role: 'upgrader'}}
             );
@@ -68,7 +69,7 @@ var ctrlSpawn = {
         if(this.harvesters.length < conf.MAX_HARVESTERS) {
             var creepName = 'h-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                conf.CREEP_TEMPLATE,
+                modelCreep.generalCreep,
                 creepName,
                 {memory: {role: 'harvester'}}
             );
