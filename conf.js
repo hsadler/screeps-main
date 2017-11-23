@@ -3,14 +3,14 @@ var conf = {
 
 
     // creep
-    MAX_HARVESTERS: 4,
+    MAX_HARVESTERS: 6,
     MAX_UPGRADERS: 6,
-    MAX_BUILDERS: 2,
+    MAX_BUILDERS: 4,
 
     CREEP_TEMPLATE: [
         WORK,CARRY,MOVE,MOVE,
         WORK,CARRY,MOVE,MOVE,
-        // WORK,CARRY,MOVE,MOVE,
+        WORK,CARRY,MOVE,MOVE,
         // WORK,CARRY,MOVE,MOVE,
     ],
 

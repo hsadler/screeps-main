@@ -2,6 +2,9 @@
 // includes
 var conf = require('conf');
 
+// models
+var modelGame = require('model.game');
+
 // roles
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
@@ -105,30 +108,6 @@ var ctrlSpawn = {
         var xPos = 4;
         var infoStyle = {align: 'left', opacity: 0.8};
 
-        var extensionStructures = spawn.room.find(FIND_STRUCTURES, {
-            filter: function(structure) {
-                return structure.structureType === STRUCTURE_EXTENSION;
-            }
-        });
-
-        var getTotalEnergyCapacity = function() {
-            var sum = 0;
-            sum += spawn.energyCapacity;
-            extensionStructures.forEach(function(extension) {
-                sum += extension.energyCapacity;
-            });
-            return sum;
-        };
-
-        var getTotalStoredEnergy = function() {
-            var sum = 0;
-            sum += spawn.energy;
-            extensionStructures.forEach(function(extension) {
-                sum += extension.energy;
-            });
-            return sum;
-        };
-
         spawn.room.visual
 
             // game ticks
@@ -171,11 +150,11 @@ var ctrlSpawn = {
 
             // energy info
             .text(
-                'Energy capacity: ' + getTotalEnergyCapacity(),
+                'Energy capacity: ' + modelGame.totalEnergyCapacity,
                 xPos, spawn.pos.y + 6, infoStyle
             )
             .text(
-                'Energy Stored: ' + getTotalStoredEnergy(),
+                'Energy Stored: ' + modelGame.totalEnergyStored,
                 xPos, spawn.pos.y + 7, infoStyle
             )
             .text(

@@ -1,7 +1,15 @@
 
 
-RESOURCES:
+NOTES
 
+architecture
+    - models: holds data, CRUD methods for a thing
+    - controller: controls behavior for a thing or things
+    - role: controller for creep type
+
+
+
+RESOURCES:
 
 game api
 http://docs.screeps.com/api/

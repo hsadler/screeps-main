@@ -4,8 +4,6 @@ better game info display
     X bool constant for toggle
     - info: Summary of energy information: harvest/min, storage
 
-implement mode memory for harvester creep (upgraders and builders already have)
-
 creep evolution system
     - stub methods, interfaces
     - implement naive solution
