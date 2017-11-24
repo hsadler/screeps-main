@@ -5,7 +5,7 @@ var conf = require('conf');
 // models
 var modelGame = require('model.game');
 var modelCreep = require('model.creep');
-var modelEnergySources = require('mode.energy_sources');
+var modelEnergySources = require('model.energy_sources');
 
 // controllers
 var ctrlCreep = require('ctrl.creep');
@@ -17,7 +17,6 @@ var ctrlSpawn = {
 
 
     proc: function() {
-        this.init();
         this.spawnCreep();
         ctrlCreep.assignCreepRoles();
         if(conf.DISPLAY_GAME_INFO) this.displayGameInformation();

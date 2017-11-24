@@ -1,6 +1,6 @@
 
 // models
-var modelEnergySources = require('mode.energy_sources');
+var modelEnergySources = require('model.energy_sources');
 
 
 // GOVERNS UPGRADER BEHAVIOR
