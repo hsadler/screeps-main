@@ -15,11 +15,7 @@ var roleBuilder = require('role.builder');
 var ctrlCreep = {
 
 
-    SHOW_MESSAGES: false,
-
-
     proc: function() {
-        if(this.SHOW_MESSAGES) this.show_messages();
         this.clearDeadCreepFromMemory();
     },
 
@@ -39,19 +35,6 @@ var ctrlCreep = {
             } else if(creep.memory.role == 'builder') {
                 roleBuilder.run(creep);
             }
-        }
-    },
-
-
-    show_messages: function() {
-        for(var name in Game.creeps) {
-            var creep = Game.creeps[name];
-            creep.room.visual.text(
-                creep.memory.role,
-                creep.pos.x,
-                creep.pos.y + 1,
-                {align: 'center', opacity: 0.8}
-            );
         }
     },
 

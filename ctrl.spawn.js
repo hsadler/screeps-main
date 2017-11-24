@@ -19,6 +19,7 @@ var ctrlSpawn = {
     proc: function() {
         this.init();
         this.spawnCreep();
+        ctrlCreep.assignCreepRoles();
         if(conf.DISPLAY_GAME_INFO) this.displayGameInformation();
     },
 
@@ -76,9 +77,6 @@ var ctrlSpawn = {
                 {align: 'left', opacity: 0.8});
         }
 
-        // assign creep roles
-        ctrlCreep.assignCreepRoles();
-
     },
 
 
@@ -116,7 +114,7 @@ var ctrlSpawn = {
                 xPos, spawn.pos.y + 1, infoStyle
             )
             .text(
-                'Miners: ' + modelCreep.minera.length,
+                'Miners: ' + modelCreep.miners.length,
                 xPos, spawn.pos.y + 2, infoStyle
             )
             .text(
