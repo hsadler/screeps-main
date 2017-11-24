@@ -19,6 +19,12 @@ new role: miner
     - miner creep has specialized part template
     - alter the 'harvest' mode of other creeps to transfer from the miner creeps
 
+new role: hauler
+    - 1 per miner
+    - assigned to a miner
+    - picks up miner's dropped energy
+    - deliver to base
+
 renew/recycle system for creeps
 
 analytics system - get insights into:

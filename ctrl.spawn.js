@@ -56,7 +56,7 @@ var ctrlSpawn = {
         }
 
         // spawn miners if needed (priority 1)
-        if(modelCreep.miners.length < conf.MAX_MINERS) {
+        if(modelCreep.miners.length < modelEnergySources.sources.length) {
             var creepName = 'm-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 modelCreep.minerCreep,
