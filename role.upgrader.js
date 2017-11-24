@@ -1,4 +1,7 @@
 
+// models
+var modelEnergySources = require('mode.energy_sources');
+
 
 // GOVERNS UPGRADER BEHAVIOR
 
@@ -35,7 +38,7 @@ var roleUpgrader = {
         }
         // harvesting mode
         else {
-            var sources = creep.room.find(FIND_SOURCES);
+            var sources = modelEnergySources.sources;
             // TODO REFACTOR: temporary way to split energy nodes
             var sourceToHarvest = sources.length > 1 ? sources[1] : sources[0];
             if(creep.harvest(sourceToHarvest) == ERR_NOT_IN_RANGE) {

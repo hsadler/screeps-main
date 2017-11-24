@@ -25,6 +25,7 @@ analytics system - get insights into:
     - harvest/tick
     - storage/tick
     - controller upgrade/tick
+    - construction/tick
 
 road building
 

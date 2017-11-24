@@ -5,6 +5,7 @@ var utils = require('utils');
 // models
 var modelGame = require('model.game');
 var modelCreep = require('model.creep');
+var modelEnergySources = require('mode.energy_sources');
 
 // controllers
 var ctrlSpawn = require('ctrl.spawn');
@@ -17,6 +18,7 @@ module.exports.loop = function() {
     // model processes
     modelGame.proc();
     modelCreep.proc();
+    modelEnergySources.proc();
 
     // controller processes
     ctrlSpawn.proc();

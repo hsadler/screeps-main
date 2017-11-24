@@ -1,5 +1,8 @@
 var conf = require('conf');
 
+// models
+var modelEnergySources = require('mode.energy_sources');
+
 
 // GOVERNS BUILDER BEHAVIOR
 
@@ -43,7 +46,7 @@ var roleBuilder = {
         }
         // harvest mode
         else {
-            var sources = creep.room.find(FIND_SOURCES);
+            var sources = modelEnergySources.sources;
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(
                     sources[0],

@@ -5,8 +5,10 @@ var conf = require('conf');
 // models
 var modelGame = require('model.game');
 var modelCreep = require('model.creep');
+var modelEnergySources = require('mode.energy_sources');
 
 // roles
+var roleMiner = require('role.miner');
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
@@ -25,28 +27,30 @@ var ctrlSpawn = {
     // for setting data per tick or saving to memory
     init: function() {
 
-        // get current list of harvesters
-        this.harvesters = _.filter(Game.creeps, function(creep) {
-            return creep.memory.role == 'harvester';
-        });
+        // DEPRICATED DELETE: this now resides in model.creep
 
-        // get current list of updgraders
-        this.upgraders = _.filter(Game.creeps, function(creep) {
-            return creep.memory.role == 'upgrader';
-        });
+        // // get current list of harvesters
+        // this.harvesters = _.filter(Game.creeps, function(creep) {
+        //     return creep.memory.role == 'harvester';
+        // });
 
-        // get current list of builders
-        this.builders = _.filter(Game.creeps, function(creep) {
-            return creep.memory.role == 'builder';
-        });
+        // // get current list of updgraders
+        // this.upgraders = _.filter(Game.creeps, function(creep) {
+        //     return creep.memory.role == 'upgrader';
+        // });
+
+        // // get current list of builders
+        // this.builders = _.filter(Game.creeps, function(creep) {
+        //     return creep.memory.role == 'builder';
+        // });
 
     },
 
 
     spawnCreep: function() {
 
-        // spawn builders if needed (priority 3)
-        if(this.builders.length < conf.MAX_BUILDERS) {
+        // spawn builders if needed (priority 4)
+        if(modelCreep.builders.length < conf.MAX_BUILDERS) {
             var creepName = 'b-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 modelCreep.generalCreep,
@@ -55,8 +59,8 @@ var ctrlSpawn = {
             );
         }
 
-        // spawn upgraders if needed (priority 2)
-        if(this.upgraders.length < conf.MAX_UPGRADERS) {
+        // spawn upgraders if needed (priority 3)
+        if(modelCreep.upgraders.length < conf.MAX_UPGRADERS) {
             var creepName = 'u-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 modelCreep.generalCreep,
@@ -65,13 +69,23 @@ var ctrlSpawn = {
             );
         }
 
-        // spawn harvesters if needed (priority 1)
-        if(this.harvesters.length < conf.MAX_HARVESTERS) {
+        // spawn harvesters if needed (priority 2)
+        if(modelCreep.harvesters.length < conf.MAX_HARVESTERS) {
             var creepName = 'h-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 modelCreep.generalCreep,
                 creepName,
                 {memory: {role: 'harvester'}}
+            );
+        }
+
+        // spawn miners if needed (priority 1)
+        if(modelCreep.miners.length < conf.MAX_MINERS) {
+            var creepName = 'm-' + Game.time;
+            Game.spawns['Spawn1'].spawnCreep(
+                modelCreep.minerCreep,
+                creepName,
+                {memory: {role: 'miner'}}
             );
         }
 
@@ -89,7 +103,9 @@ var ctrlSpawn = {
         // assign creep roles
         for(var name in Game.creeps) {
             var creep = Game.creeps[name];
-            if(creep.memory.role == 'harvester') {
+            if(creep.memory.role == 'miner') {
+                roleMiner.run(creep);
+            } else if(creep.memory.role == 'harvester') {
                 roleHarvester.run(creep);
             } else if(creep.memory.role == 'upgrader') {
                 roleUpgrader.run(creep);

@@ -25,13 +25,38 @@ modelCreep.GENERAL_CREEP_TEMPLATE = [
     MOVE,MOVE
 ];
 
+// drop mining template
+modelCreep.MINER_CREEP_TEMPLATE = [
+    MOVE,WORK,WORK,WORK,WORK,WORK,WORK
+];
+
 
 // methods
 
 modelCreep.proc = function() {
+
+    // get lists of creep types
+    modelCreep.miners = _.filter(Game.creeps, function(creep) {
+        return creep.memory.role == 'miner';
+    });
+    modelCreep.harvesters = _.filter(Game.creeps, function(creep) {
+        return creep.memory.role == 'harvester';
+    });
+    modelCreep.upgraders = _.filter(Game.creeps, function(creep) {
+        return creep.memory.role == 'upgrader';
+    });
+    modelCreep.builders = _.filter(Game.creeps, function(creep) {
+        return creep.memory.role == 'builder';
+    });
+
+    // generate creep templates
     modelCreep.generalCreep = modelCreep.getCreepParts(
         modelCreep.GENERAL_CREEP_TEMPLATE
     );
+    modelCreep.minerCreep = modelCreep.getCreepParts(
+        modelCreep.MINER_CREEP_TEMPLATE
+    );
+
 };
 
 modelCreep.getCreepParts = function(creepTemplate) {
