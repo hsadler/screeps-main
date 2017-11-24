@@ -8,7 +8,7 @@ var modelEnergySources = require('model.energy_sources');
 var roleMiner = {
 
     run: function(creep) {
-        // assign source if not assigned yet
+        // assign source if not yet assigned
         if(!creep.memory.sourceId) {
             var source = this.getUnminedSource();
             if(source) {

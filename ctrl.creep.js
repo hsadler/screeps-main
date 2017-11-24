@@ -5,6 +5,7 @@ var modelCreep = require('model.creep');
 
 // roles
 var roleMiner = require('role.miner');
+var roleHauler = require('role.hauler');
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
@@ -26,9 +27,14 @@ var ctrlCreep = {
             var creep = Game.creeps[name];
             if(creep.memory.role == 'miner') {
                 roleMiner.run(creep);
-            } else if(creep.memory.role == 'harvester') {
-                roleHarvester.run(creep);
-            } else if(creep.memory.role == 'upgrader') {
+            } else if(creep.memory.role == 'hauler') {
+                roleHauler.run(creep);
+            }
+            // TODO DELETE: no harvesters
+            // else if(creep.memory.role == 'harvester') {
+            //     roleHarvester.run(creep);
+            // }
+            else if(creep.memory.role == 'upgrader') {
                 roleUpgrader.run(creep);
             } else if(creep.memory.role == 'upgrader') {
                 roleUpgrader.run(creep);

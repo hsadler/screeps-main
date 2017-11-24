@@ -3,8 +3,6 @@ var conf = {
 
 
     // creep
-    MAX_MINERS: 2,
-    MAX_HARVESTERS: 4,
     MAX_UPGRADERS: 4,
 
 

@@ -9,7 +9,13 @@ var modelEnergySources = require('model.energy_sources');
 
 var roleHauler = {
 
+
     run: function(creep) {
+
+        // assign miner if not yet assigned
+        if(!creep.memory.minerId) {
+            // code..
+        }
 
         // ran out of energy while delivering, change to haul mode
         if(creep.memory.delivering && creep.carry.energy == 0) {
@@ -61,6 +67,7 @@ var roleHauler = {
         else {
 
             // TODO: implement pickup logic
+            // if cannot pickup energy, move to assigned miner
 
             // var sources = modelEnergySources.sources;
             // if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
@@ -71,8 +78,8 @@ var roleHauler = {
             // }
         }
 
-
     }
+
 
 };
 
