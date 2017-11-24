@@ -7,12 +7,11 @@ var modelGame = require('model.game');
 var modelCreep = require('model.creep');
 var modelEnergySources = require('mode.energy_sources');
 
-// roles
-var roleMiner = require('role.miner');
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
+// controllers
+var ctrlCreep = require('ctrl.creep');
 
+
+// CONTROLS SPAWN BEHAVIOR
 
 var ctrlSpawn = {
 
@@ -21,29 +20,6 @@ var ctrlSpawn = {
         this.init();
         this.spawnCreep();
         if(conf.DISPLAY_GAME_INFO) this.displayGameInformation();
-    },
-
-
-    // for setting data per tick or saving to memory
-    init: function() {
-
-        // DEPRICATED DELETE: this now resides in model.creep
-
-        // // get current list of harvesters
-        // this.harvesters = _.filter(Game.creeps, function(creep) {
-        //     return creep.memory.role == 'harvester';
-        // });
-
-        // // get current list of updgraders
-        // this.upgraders = _.filter(Game.creeps, function(creep) {
-        //     return creep.memory.role == 'upgrader';
-        // });
-
-        // // get current list of builders
-        // this.builders = _.filter(Game.creeps, function(creep) {
-        //     return creep.memory.role == 'builder';
-        // });
-
     },
 
 
@@ -101,20 +77,7 @@ var ctrlSpawn = {
         }
 
         // assign creep roles
-        for(var name in Game.creeps) {
-            var creep = Game.creeps[name];
-            if(creep.memory.role == 'miner') {
-                roleMiner.run(creep);
-            } else if(creep.memory.role == 'harvester') {
-                roleHarvester.run(creep);
-            } else if(creep.memory.role == 'upgrader') {
-                roleUpgrader.run(creep);
-            } else if(creep.memory.role == 'upgrader') {
-                roleUpgrader.run(creep);
-            } else if(creep.memory.role == 'builder') {
-                roleBuilder.run(creep);
-            }
-        }
+        ctrlCreep.assignCreepRoles();
 
     },
 
@@ -153,30 +116,34 @@ var ctrlSpawn = {
                 xPos, spawn.pos.y + 1, infoStyle
             )
             .text(
-                'Harvesters: ' + this.harvesters.length,
+                'Miners: ' + modelCreep.minera.length,
                 xPos, spawn.pos.y + 2, infoStyle
             )
             .text(
-                'Upgraders: ' + this.upgraders.length,
+                'Harvesters: ' + modelCreep.harvesters.length,
                 xPos, spawn.pos.y + 3, infoStyle
             )
             .text(
-                'Builders: ' + this.builders.length,
+                'Upgraders: ' + modelCreep.upgraders.length,
                 xPos, spawn.pos.y + 4, infoStyle
+            )
+            .text(
+                'Builders: ' + modelCreep.builders.length,
+                xPos, spawn.pos.y + 5, infoStyle
             )
 
             // energy info
             .text(
                 'Energy capacity: ' + modelGame.totalEnergyCapacity,
-                xPos, spawn.pos.y + 6, infoStyle
-            )
-            .text(
-                'Energy Stored: ' + modelGame.totalEnergyStored,
                 xPos, spawn.pos.y + 7, infoStyle
             )
             .text(
-                'Harvest rate: coming soon...',
+                'Energy Stored: ' + modelGame.totalEnergyStored,
                 xPos, spawn.pos.y + 8, infoStyle
+            )
+            .text(
+                'Harvest rate: coming soon...',
+                xPos, spawn.pos.y + 9, infoStyle
             );
 
     }

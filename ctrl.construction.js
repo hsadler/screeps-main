@@ -1,4 +1,7 @@
 
+
+// CONTROLS CONSTRUCTION BEHAVIOR
+
 var ctrlConstruction = {
 
 

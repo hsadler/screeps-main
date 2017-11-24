@@ -59,6 +59,7 @@ modelCreep.proc = function() {
 
 };
 
+
 modelCreep.getCreepParts = function(creepTemplate) {
 
     var template = [];
