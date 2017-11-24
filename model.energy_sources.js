@@ -12,7 +12,7 @@ modelEnergySources.proc = function() {
 };
 
 modelEnergySources.getSources = function() {
-    retrun Game.spawns['Spawn1'].room.find(FIND_SOURCES);
+    return Game.spawns['Spawn1'].room.find(FIND_SOURCES);
 };
 
 
