@@ -4,7 +4,7 @@ var conf = {
 
     // creep
     MAX_UPGRADERS: 4,
-    MAX_BUIDLERS: 2,
+    MAX_BUILDERS: 4,
 
 
     // construction sites
@@ -13,6 +13,7 @@ var conf = {
 
     // flags
     IDLE_CREEP_FLAG: 'idle',
+    ENERGY_PICKUP_FLAG: 'pickup',
 
 
     // display game information toggle

@@ -10,12 +10,12 @@ var roleBuilder = {
 
     run: function(creep) {
 
-        // ran out of energy while building
+        // ran out of energy while building, change to pickup mode
         if(creep.memory.building && creep.carry.energy == 0) {
             creep.memory.building = false;
-            creep.say('🔄 harvest');
+            creep.say('🔄 pickup');
         }
-        // at max energy capacity
+        // at max energy capacity, change to build mode
         if(
             !creep.memory.building &&
             creep.carry.energy == creep.carryCapacity
@@ -44,13 +44,19 @@ var roleBuilder = {
                 );
             }
         }
-        // harvest mode
+        // pickup mode
         else {
-            var sources = modelEnergySources.sources;
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+            var ePickupFlag = Game.flags[conf.ENERGY_PICKUP_FLAG];
+            if(creep.pos.isNearTo(ePickupFlag)) {
+                var energy = creep.pos.findClosestByRange(
+                    FIND_DROPPED_RESOURCES,
+                    {filter: RESOURCE_ENERGY}
+                );
+                creep.pickup(energy);
+            } else {
                 creep.moveTo(
-                    sources[0],
-                    {visualizePathStyle: {stroke: '#ffaa00'}}
+                    ePickupFlag,
+                    {visualizePathStyle: {stroke: '#ffffff'}}
                 );
             }
         }

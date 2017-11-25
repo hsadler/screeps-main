@@ -30,16 +30,23 @@ modelCreep.MINER_CREEP_TEMPLATE = [
     MOVE,WORK,WORK,WORK,WORK,WORK,WORK
 ];
 
-// without WORK
+// with WORK
 modelCreep.HAULER_CREEP_TEMPLATE = [
+    MOVE,WORK,MOVE,CARRY,
+    MOVE,CARRY,MOVE,CARRY,
+    MOVE,CARRY,MOVE,CARRY,
+];
+
+modelCreep.UPGRADER_CREEP_TEMPLATE = [
     MOVE,CARRY,MOVE,CARRY,
     MOVE,CARRY,MOVE,CARRY,
     MOVE,CARRY,MOVE,CARRY,
+];
+
+modelCreep.BUILDER_CREEP_TEMPLATE = [
     MOVE,CARRY,MOVE,CARRY,
     MOVE,CARRY,MOVE,CARRY,
     MOVE,CARRY,MOVE,CARRY,
-    MOVE,CARRY,MOVE,CARRY,
-    MOVE,CARRY,MOVE,CARRY
 ];
 
 
@@ -70,6 +77,12 @@ modelCreep.proc = function() {
     );
     modelCreep.haulerCreep = modelCreep.getCreepParts(
         modelCreep.HAULER_CREEP_TEMPLATE
+    );
+    modelCreep.upgraderCreep = modelCreep.getCreepParts(
+        modelCreep.UPGRADER_CREEP_TEMPLATE
+    );
+    modelCreep.builderCreep = modelCreep.getCreepParts(
+        modelCreep.BUILDER_CREEP_TEMPLATE
     );
 
 };

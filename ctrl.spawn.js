@@ -29,7 +29,7 @@ var ctrlSpawn = {
         if(modelCreep.builders.length < conf.MAX_BUILDERS) {
             var creepName = 'b-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                modelCreep.generalCreep,
+                modelCreep.builderCreep,
                 creepName,
                 {memory: {role: 'builder'}}
             );
@@ -39,7 +39,7 @@ var ctrlSpawn = {
         if(modelCreep.upgraders.length < conf.MAX_UPGRADERS) {
             var creepName = 'u-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
-                modelCreep.generalCreep,
+                modelCreep.upgraderCreep,
                 creepName,
                 {memory: {role: 'upgrader'}}
             );

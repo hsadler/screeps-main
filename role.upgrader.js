@@ -1,3 +1,4 @@
+var conf = require('conf');
 
 // models
 var modelEnergySources = require('model.energy_sources');
@@ -10,12 +11,12 @@ var roleUpgrader = {
 
     run: function(creep) {
 
-        // ran out of energy while upgrading, change to harvest mode
+        // ran out of energy while upgrading, change to pickup mode
         if(creep.memory.upgrading && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
-            creep.say('🔄 harvest');
+            creep.say('🔄 pickup');
 	    }
-        // reached max energy capacity while harvesting, change to upgrade mode
+        // reached max energy capacity while picking up, change to upgrade mode
 	    if(
             !creep.memory.upgrading &&
             creep.carry.energy == creep.carryCapacity
@@ -36,15 +37,19 @@ var roleUpgrader = {
                 );
             }
         }
-        // harvesting mode
+        // pickup mode
         else {
-            var sources = modelEnergySources.sources;
-            // TODO REFACTOR: temporary way to split energy nodes
-            var sourceToHarvest = sources.length > 1 ? sources[1] : sources[0];
-            if(creep.harvest(sourceToHarvest) == ERR_NOT_IN_RANGE) {
+            var ePickupFlag = Game.flags[conf.ENERGY_PICKUP_FLAG];
+            if(creep.pos.isNearTo(ePickupFlag)) {
+                var energy = creep.pos.findClosestByRange(
+                    FIND_DROPPED_RESOURCES,
+                    {filter: RESOURCE_ENERGY}
+                );
+                creep.pickup(energy);
+            } else {
                 creep.moveTo(
-                    sourceToHarvest,
-                    {visualizePathStyle: {stroke: '#ffaa00'}}
+                    ePickupFlag,
+                    {visualizePathStyle: {stroke: '#ffffff'}}
                 );
             }
         }

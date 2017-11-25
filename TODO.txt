@@ -1,31 +1,20 @@
 
-better game info display
-    X move to corner of room
-    X bool constant for toggle
-    - info: Summary of energy information: harvest/min, storage
-
-creep evolution system
-    X stub methods, interfaces
-    X implement naive solution
-    - suicide inferior creeps?
-
-handle idle creeps
-ideas:
-    X flag system (idle creeps move to flag so that energy nodes are not blocked)
-    - role system (idle creeps are given a new role)
-
-new role: miner (needs testing)
+X new role: miner (needs testing)
     X miner creep mines energy only
     X miner creep has specialized part template
     X add hauler role to pair with miner role
+    X reassign miner to hauler if assigned dies
 
-new role: hauler (needs testing)
+X new role: hauler (needs testing)
     X 1 per miner
     X assigned to a miner
     X picks up miner's dropped energy
     X deliver to base
 
-begin game with haulers acting as harvesters until miner creeps are made
+X begin game with haulers acting as harvesters until miner creeps are made
+
+X create single energy pickup point for upgraders and builders
+    X change rest of creeps to pickup dropped energy
 
 analytics system - get insights into:
     - harvest/tick

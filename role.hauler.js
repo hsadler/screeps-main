@@ -13,8 +13,8 @@ var roleHauler = {
 
     run: function(creep) {
 
-        // assign miner if not yet assigned
-        if(!creep.memory.minerId) {
+        // assign miner if not yet assigned or reassign if miner is dead
+        if(!creep.memory.minerId || !Game.getObjectById(creep.memory.minerId)) {
             var miner = this.getUnassignedMiner();
             if(miner) {
                 creep.memory.minerId = miner.id;
@@ -61,21 +61,30 @@ var roleHauler = {
             }
             // move to idle flag
             else {
-                creep.moveTo(
-                    Game.flags[conf.IDLE_CREEP_FLAG],
-                    {visualizePathStyle: {stroke: '#ffffff'}}
-                );
+                var ePickupFlag = Game.flags[conf.ENERGY_PICKUP_FLAG];
+                if(creep.pos.isEqualTo(ePickupFlag)) {
+                    creep.drop(RESOURCE_ENERGY);
+                } else {
+                    creep.moveTo(
+                        ePickupFlag,
+                        {visualizePathStyle: {stroke: '#ffffff'}}
+                    );
+                }
             }
         }
         // pickup mode
         else {
             // act as hauler if we have paired miner
             if(creep.memory.minerId) {
+                var miner = Game.getObjectById(creep.memory.minerId);
                 // if cannot pickup energy, move to assigned miner
-                var target = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+                var target = miner.pos.findClosestByRange(
+                    FIND_DROPPED_RESOURCES,
+                    {filter: RESOURCE_ENERGY}
+                );
                 if(target) {
                     if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(Game.getObjectById(creep.memory.minerId))
+                        creep.moveTo(miner);
                     }
                 }
             }
