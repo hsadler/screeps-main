@@ -26,7 +26,10 @@ var ctrlSpawn = {
     spawnCreep: function() {
 
         // spawn builders if needed (priority 4)
-        if(modelCreep.builders.length < conf.MAX_BUILDERS) {
+        if(
+            modelCreep.builders.length < conf.MAX_BUILDERS &&
+            Game.spawns['Spawn1'].room.find(FIND_CONSTRUCTION_SITES).length > 0
+        ) {
             var creepName = 'b-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 modelCreep.builderCreep,

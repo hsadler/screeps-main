@@ -18,22 +18,23 @@ var roleHauler = {
             var miner = this.getUnassignedMiner();
             if(miner) {
                 creep.memory.minerId = miner.id;
+            } else {
+                creep.memory.minerId = null
             }
         }
 
         // ran out of energy while delivering, change to haul mode
         if(creep.memory.delivering && creep.carry.energy == 0) {
             creep.memory.delivering = false;
-            creep.say('🔄 pickup');
+            creep.say('🔄  pickup');
         }
         // reached max energy capacity while picking up, change to deliver mode
-        // TODO: change conditional for instant pickup and constant delivery
         if(
             !creep.memory.delivering &&
             creep.carry.energy == creep.carryCapacity
         ) {
             creep.memory.delivering = true;
-            creep.say('⚡ deliver');
+            creep.say('⚡  deliver');
         }
 
         // delivering mode
@@ -84,7 +85,10 @@ var roleHauler = {
                 );
                 if(target) {
                     if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(miner);
+                        creep.moveTo(
+                            miner,
+                            {visualizePathStyle: {stroke: '#ffaa00'}}
+                        );
                     }
                 }
             }

@@ -37,18 +37,6 @@ modelCreep.HAULER_CREEP_TEMPLATE = [
     MOVE,CARRY,MOVE,CARRY,
 ];
 
-modelCreep.UPGRADER_CREEP_TEMPLATE = [
-    MOVE,CARRY,MOVE,CARRY,
-    MOVE,CARRY,MOVE,CARRY,
-    MOVE,CARRY,MOVE,CARRY,
-];
-
-modelCreep.BUILDER_CREEP_TEMPLATE = [
-    MOVE,CARRY,MOVE,CARRY,
-    MOVE,CARRY,MOVE,CARRY,
-    MOVE,CARRY,MOVE,CARRY,
-];
-
 
 // methods
 
@@ -79,10 +67,10 @@ modelCreep.proc = function() {
         modelCreep.HAULER_CREEP_TEMPLATE
     );
     modelCreep.upgraderCreep = modelCreep.getCreepParts(
-        modelCreep.UPGRADER_CREEP_TEMPLATE
+        modelCreep.GENERAL_CREEP_TEMPLATE
     );
     modelCreep.builderCreep = modelCreep.getCreepParts(
-        modelCreep.BUILDER_CREEP_TEMPLATE
+        modelCreep.GENERAL_CREEP_TEMPLATE
     );
 
 };
