@@ -14,18 +14,16 @@ ideas:
     X flag system (idle creeps move to flag so that energy nodes are not blocked)
     - role system (idle creeps are given a new role)
 
-new role: miner
-    - miner creep mines energy only
-    - miner creep has specialized part template
-    - alter the 'harvest' mode of other creeps to transfer from the miner creeps
+new role: miner (needs testing)
+    X miner creep mines energy only
+    X miner creep has specialized part template
+    X add hauler role to pair with miner role
 
-new role: hauler
-    - 1 per miner
-    - assigned to a miner
-    - picks up miner's dropped energy
-    - deliver to base
-
-renew/recycle system for creeps
+new role: hauler (needs testing)
+    X 1 per miner
+    X assigned to a miner
+    X picks up miner's dropped energy
+    X deliver to base
 
 analytics system - get insights into:
     - harvest/tick
@@ -43,5 +41,11 @@ capture and control of another room
     - creep scout
     - capture
     - multi-room logic (refactor from single-room)
+
+
+================================================================
+
+
+renew/recycle system for creeps (maybe)
 
 
