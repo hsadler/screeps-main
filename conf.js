@@ -4,6 +4,7 @@ var conf = {
 
     // creep
     MAX_UPGRADERS: 4,
+    MAX_BUIDLERS: 2,
 
 
     // construction sites

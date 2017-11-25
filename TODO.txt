@@ -25,7 +25,7 @@ new role: hauler (needs testing)
     X picks up miner's dropped energy
     X deliver to base
 
-begin game with harvesters until enough creeps are made
+begin game with haulers acting as harvesters until miner creeps are made
 
 analytics system - get insights into:
     - harvest/tick

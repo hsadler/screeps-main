@@ -45,23 +45,23 @@ var ctrlSpawn = {
             );
         }
 
-        // spawn haulers if needed (priority 2)
-        if(modelCreep.haulers.length < modelCreep.miners.length) {
-            var creepName = 'h-' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep(
-                modelCreep.haulerCreep,
-                creepName,
-                {memory: {role: 'hauler'}}
-            );
-        }
-
-        // spawn miners if needed (priority 1)
+        // spawn miners if needed (priority 2)
         if(modelCreep.miners.length < modelEnergySources.sources.length) {
             var creepName = 'm-' + Game.time;
             Game.spawns['Spawn1'].spawnCreep(
                 modelCreep.minerCreep,
                 creepName,
                 {memory: {role: 'miner'}}
+            );
+        }
+
+        // spawn haulers if needed (priority 1)
+        if(modelCreep.haulers.length < modelEnergySources.sources.length) {
+            var creepName = 'h-' + Game.time;
+            Game.spawns['Spawn1'].spawnCreep(
+                modelCreep.haulerCreep,
+                creepName,
+                {memory: {role: 'hauler'}}
             );
         }
 

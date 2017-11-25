@@ -69,11 +69,24 @@ var roleHauler = {
         }
         // pickup mode
         else {
-            // if cannot pickup energy, move to assigned miner
-            var target = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
-            if(target) {
-                if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(Game.getObjectById(creep.memory.minerId))
+            // act as hauler if we have paired miner
+            if(creep.memory.minerId) {
+                // if cannot pickup energy, move to assigned miner
+                var target = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+                if(target) {
+                    if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
+                        creep.moveTo(Game.getObjectById(creep.memory.minerId))
+                    }
+                }
+            }
+            // else, act as harvester
+            else {
+                var sources = modelEnergySources.sources;
+                if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(
+                        sources[0],
+                        {visualizePathStyle: {stroke: '#ffaa00'}}
+                    );
                 }
             }
         }
