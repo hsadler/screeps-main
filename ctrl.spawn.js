@@ -45,17 +45,6 @@ var ctrlSpawn = {
             );
         }
 
-        // TODO DELETE: no harvesters
-        // spawn harvesters if needed (priority 2)
-        // if(modelCreep.harvesters.length < conf.MAX_HARVESTERS) {
-        //     var creepName = 'h-' + Game.time;
-        //     Game.spawns['Spawn1'].spawnCreep(
-        //         modelCreep.generalCreep,
-        //         creepName,
-        //         {memory: {role: 'harvester'}}
-        //     );
-        // }
-
         // spawn haulers if needed (priority 2)
         if(modelCreep.haulers.length < modelCreep.miners.length) {
             var creepName = 'h-' + Game.time;

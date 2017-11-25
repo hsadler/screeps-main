@@ -31,17 +31,21 @@ var roleMiner = {
     },
 
     getUnminedSource: function() {
-        var unmined = [];
+        // get list of ids for assigned energy sources
+        var assignedSourceIds = [];
         for(var name in Game.creeps) {
             var creep = Game.creeps[name];
             if(creep.memory.sourceId) {
                 assignedSourceIds.push(creep.memory.sourceId);
             }
         }
+        // get list of unmined energy sources by subtracting assigned
+        // energy sources from total energy sources
         var unminedSources = modelEnergySources.sources
             .filter(function(source) {
                 return assignedSourceIds.indexOf(source.id) === -1;
             });
+        // return result
         if(unminedSources.length > 0) {
             return unminedSources[0];
         } else {

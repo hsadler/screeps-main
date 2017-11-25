@@ -2,6 +2,7 @@
 var conf = require('conf');
 
 // models
+var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
 
 
@@ -14,7 +15,10 @@ var roleHauler = {
 
         // assign miner if not yet assigned
         if(!creep.memory.minerId) {
-            // code..
+            var miner = this.getUnassignedMiner();
+            if(miner) {
+                creep.memory.minerId = miner.id;
+            }
         }
 
         // ran out of energy while delivering, change to haul mode
@@ -65,20 +69,40 @@ var roleHauler = {
         }
         // pickup mode
         else {
-
-            // TODO: implement pickup logic
             // if cannot pickup energy, move to assigned miner
-
-            // var sources = modelEnergySources.sources;
-            // if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-            //     creep.moveTo(
-            //         sources[0],
-            //         {visualizePathStyle: {stroke: '#ffaa00'}}
-            //     );
-            // }
+            var target = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+            if(target) {
+                if(creep.pickup(target) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(Game.getObjectById(creep.memory.minerId))
+                }
+            }
         }
 
-    }
+    },
+
+
+    getUnassignedMiner: function() {
+        // get list of ids for assigned miner creeps
+        var assignedMinerIds = [];
+        for(var name in Game.creeps) {
+            var creep = Game.creeps[name];
+            if(creep.memory.minerId) {
+                assignedMinerIds.push(creep.memory.minerId);
+            }
+        }
+        // get list of unassigned miners by subtracting assigned
+        // miners from total miners
+        var unassignedMiners = modelCreep.miners
+            .filter(function(miner) {
+                return assignedMinerIds.indexOf(miner.id) === -1;
+            });
+        // return result
+        if(unassignedMiners.length > 0) {
+            return unassignedMiners[0];
+        } else {
+            return null;
+        }
+    };
 
 
 };
