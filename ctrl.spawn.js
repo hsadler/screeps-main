@@ -82,7 +82,7 @@ var ctrlSpawn = {
     displayGameInformation: function() {
 
         var spawn = Game.spawns['Spawn1'];
-        var xPos = 4;
+        var xPos = 20;
         var infoStyle = {align: 'left', opacity: 0.8};
 
         spawn.room.visual
@@ -117,7 +117,7 @@ var ctrlSpawn = {
                 xPos, spawn.pos.y + 2, infoStyle
             )
             .text(
-                'Harvesters: ' + modelCreep.harvesters.length,
+                'Hauler: ' + modelCreep.haulers.length,
                 xPos, spawn.pos.y + 3, infoStyle
             )
             .text(

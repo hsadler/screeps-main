@@ -102,10 +102,10 @@ var roleHauler = {
         } else {
             return null;
         }
-    };
+    }
 
 
 };
 
 
-module.exports = roleHarvester;
+module.exports = roleHauler;

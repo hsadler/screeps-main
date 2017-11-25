@@ -51,8 +51,8 @@ modelCreep.proc = function() {
     modelCreep.miners = _.filter(Game.creeps, function(creep) {
         return creep.memory.role == 'miner';
     });
-    modelCreep.harvesters = _.filter(Game.creeps, function(creep) {
-        return creep.memory.role == 'harvester';
+    modelCreep.haulers = _.filter(Game.creeps, function(creep) {
+        return creep.memory.role == 'hauler';
     });
     modelCreep.upgraders = _.filter(Game.creeps, function(creep) {
         return creep.memory.role == 'upgrader';
