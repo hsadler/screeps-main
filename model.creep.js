@@ -109,13 +109,13 @@ modelCreep.getCreepParts = function(creepTemplate) {
     var template = [];
     var cost = 0;
     var minCost = 250;
-    var eCapacity = Math.max(modelGame.getTotalEnergyStored, minCost);
+    var eStored = Math.max(modelGame.totalEnergyStored, minCost);
 
     // add items from creep template to result template while affordable
     var i = 0;
     template.push(creepTemplate[i]);
     cost += BODYPART_COST[creepTemplate[i]];
-    while(cost + BODYPART_COST[creepTemplate[i + 1]] <= eCapacity) {
+    while(cost + BODYPART_COST[creepTemplate[i + 1]] <= eStored) {
         i += 1;
         template.push(creepTemplate[i]);
         cost += BODYPART_COST[creepTemplate[i]];
