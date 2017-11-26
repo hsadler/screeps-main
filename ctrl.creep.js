@@ -23,18 +23,25 @@ var ctrlCreep = {
 
     // TODO: maybe refactor to use list of creep roles set in config or creep model
     assignCreepRoles: function() {
-        for(var name in Game.creeps) {
-            var creep = Game.creeps[name];
-            if(creep.memory.role == 'miner') {
-                roleMiner.run(creep);
-            } else if(creep.memory.role == 'hauler') {
-                roleHauler.run(creep);
-            } else if(creep.memory.role == 'upgrader') {
-                roleUpgrader.run(creep);
-            } else if(creep.memory.role == 'upgrader') {
-                roleUpgrader.run(creep);
-            } else if(creep.memory.role == 'builder') {
-                roleBuilder.run(creep);
+        if(Object.keys(Game.creeps).length < 4) {
+            for(var name in Game.creeps) {
+                var creep = Game.creeps[name];
+                roleHarvester.run(creep);
+            }
+        } else {
+            for(var name in Game.creeps) {
+                var creep = Game.creeps[name];
+                if(creep.memory.role == 'miner') {
+                    roleMiner.run(creep);
+                } else if(creep.memory.role == 'hauler') {
+                    roleHauler.run(creep);
+                } else if(creep.memory.role == 'upgrader') {
+                    roleUpgrader.run(creep);
+                } else if(creep.memory.role == 'upgrader') {
+                    roleUpgrader.run(creep);
+                } else if(creep.memory.role == 'builder') {
+                    roleBuilder.run(creep);
+                }
             }
         }
     },

@@ -44,7 +44,7 @@ var roleUpgrader = {
                 FIND_DROPPED_RESOURCES,
                 {filter: RESOURCE_ENERGY}
             );
-            if(!energy.pos.isEqualTo(ePickupFlag)) {
+            if(!energy || !energy.pos.isEqualTo(ePickupFlag)) {
                 creep.moveTo(
                     Game.flags[conf.IDLE_CREEP_FLAG],
                     {visualizePathStyle: {stroke: '#ffaa00'}}

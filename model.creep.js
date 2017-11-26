@@ -14,15 +14,15 @@ modelCreep.GENERAL_CREEP_TEMPLATE = [
     MOVE,MOVE,WORK,CARRY,
     MOVE,MOVE,WORK,CARRY,
     MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE,WORK,CARRY,
-    MOVE,MOVE
+    // MOVE,MOVE,WORK,CARRY,
+    // MOVE,MOVE,WORK,CARRY,
+    // MOVE,MOVE,WORK,CARRY,
+    // MOVE,MOVE,WORK,CARRY,
+    // MOVE,MOVE,WORK,CARRY,
+    // MOVE,MOVE,WORK,CARRY,
+    // MOVE,MOVE,WORK,CARRY,
+    // MOVE,MOVE,WORK,CARRY,
+    // MOVE,MOVE
 ];
 
 // drop mining template
@@ -37,12 +37,20 @@ modelCreep.HAULER_CREEP_TEMPLATE = [
     MOVE,CARRY,MOVE,CARRY,
 ];
 
+modelCreep.BASIC_CREEP_TEMPLATE = [
+    MOVE,MOVE,WORK,CARRY
+];
+
 
 // methods
 
 modelCreep.proc = function() {
+    modelCreep.generateCreepLists();
+    modelCreep.generateCreepTemplates();
+};
 
-    // get lists of creep types
+
+modelCreep.generateCreepLists = function() {
     modelCreep.miners = _.filter(Game.creeps, function(creep) {
         return creep.memory.role == 'miner';
     });
@@ -55,10 +63,20 @@ modelCreep.proc = function() {
     modelCreep.builders = _.filter(Game.creeps, function(creep) {
         return creep.memory.role == 'builder';
     });
+};
 
-    // generate creep templates
+
+modelCreep.generateCreepTemplates = function() {
+
+    var creepCount = Object.keys(Game.creeps).length;
+    var genCreepTemplate = creepCount < 4 ?
+        modelCreep.BASIC_CREEP_TEMPLATE :
+        modelCreep.GENERAL_CREEP_TEMPLATE;
+
+    // genCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
+
     modelCreep.generalCreep = modelCreep.getCreepParts(
-        modelCreep.GENERAL_CREEP_TEMPLATE
+        genCreepTemplate
     );
     modelCreep.minerCreep = modelCreep.getCreepParts(
         modelCreep.MINER_CREEP_TEMPLATE
@@ -67,15 +85,15 @@ modelCreep.proc = function() {
         modelCreep.HAULER_CREEP_TEMPLATE
     );
     modelCreep.upgraderCreep = modelCreep.getCreepParts(
-        modelCreep.GENERAL_CREEP_TEMPLATE
+        genCreepTemplate
     );
     modelCreep.builderCreep = modelCreep.getCreepParts(
-        modelCreep.GENERAL_CREEP_TEMPLATE
+        genCreepTemplate
     );
-
 };
 
 
+// TODO: update to better account for avail energy
 modelCreep.getCreepParts = function(creepTemplate) {
 
     var template = [];
