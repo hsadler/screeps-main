@@ -16,6 +16,12 @@ X begin game with haulers acting as harvesters until miner creeps are made
 X create single energy pickup point for upgraders and builders
     X change rest of creeps to pickup dropped energy
 
+restart system
+    - add logic to build new creeps when all have been killed
+
+programmatic extension construction site placement
+    - hardcode offset map from Spawn1
+
 analytics system - get insights into:
     - harvest/tick
     - storage/tick
