@@ -69,26 +69,37 @@ modelCreep.generateCreepLists = function() {
 modelCreep.generateCreepTemplates = function() {
 
     var creepCount = Object.keys(Game.creeps).length;
-    var genCreepTemplate = creepCount < 4 ?
+
+    var generalCreepTemplate = creepCount < 4 ?
         modelCreep.BASIC_CREEP_TEMPLATE :
         modelCreep.GENERAL_CREEP_TEMPLATE;
 
-    // genCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
+    var haulerCreepTemplate = creepCount < 4 ?
+        modelCreep.BASIC_CREEP_TEMPLATE :
+        modelCreep.GENERAL_CREEP_TEMPLATE;
+
+    var minerCreepTemplate = creepCount < 4 ?
+        modelCreep.BASIC_CREEP_TEMPLATE :
+        modelCreep.GENERAL_CREEP_TEMPLATE;
+
+    // generalCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
+    // haulerCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
+    // minerCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
 
     modelCreep.generalCreep = modelCreep.getCreepParts(
-        genCreepTemplate
-    );
-    modelCreep.minerCreep = modelCreep.getCreepParts(
-        modelCreep.MINER_CREEP_TEMPLATE
+        generalCreepTemplate
     );
     modelCreep.haulerCreep = modelCreep.getCreepParts(
-        modelCreep.HAULER_CREEP_TEMPLATE
+        haulerCreepTemplate
+    );
+    modelCreep.minerCreep = modelCreep.getCreepParts(
+        minerCreepTemplate
     );
     modelCreep.upgraderCreep = modelCreep.getCreepParts(
-        genCreepTemplate
+        generalCreepTemplate
     );
     modelCreep.builderCreep = modelCreep.getCreepParts(
-        genCreepTemplate
+        generalCreepTemplate
     );
 };
 

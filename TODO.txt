@@ -18,6 +18,12 @@ X create single energy pickup point for upgraders and builders
 
 recovery system
     - add logic to build new basic creeps when all have been killed
+    - add 'recovery' mode:
+        1. create conditional for recovery state
+        2. make less upgraders and builders
+        3. upgrade creep more conservatively
+
+do not create creeps besides miners and haulers until the pickup flag has energy on it
 
 programmatic handling of upgrader, builder creep amount
     - naive solution: while pickup stockpile > x, make another creep

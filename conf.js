@@ -3,8 +3,8 @@ var conf = {
 
 
     // creep
-    MAX_UPGRADERS: 4,
-    MAX_BUILDERS: 4,
+    MAX_UPGRADERS: 2,
+    MAX_BUILDERS: 1,
 
 
     // construction sites
