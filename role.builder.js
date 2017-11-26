@@ -2,6 +2,7 @@ var conf = require('conf');
 
 // models
 var modelEnergySources = require('model.energy_sources');
+var modelPickupFlag = require('model.pickup_flag');
 
 
 // GOVERNS BUILDER BEHAVIOR
@@ -46,12 +47,9 @@ var roleBuilder = {
         }
         // pickup mode
         else {
-            var ePickupFlag = Game.flags[conf.ENERGY_PICKUP_FLAG];
-            var energy = ePickupFlag.pos.findClosestByRange(
-                FIND_DROPPED_RESOURCES,
-                {filter: RESOURCE_ENERGY}
-            );
-            if(!energy || !energy.pos.isEqualTo(ePickupFlag)) {
+            var ePickupFlag = modelPickupFlag.flag;
+            var energy = modelPickupFlag.energy;
+            if(!energy) {
                 creep.moveTo(
                     Game.flags[conf.IDLE_CREEP_FLAG],
                     {visualizePathStyle: {stroke: '#ffaa00'}}

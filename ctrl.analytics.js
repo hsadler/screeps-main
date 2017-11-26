@@ -6,6 +6,8 @@ var modelGame = require('model.game');
 var modelCreep = require('model.creep');
 
 
+// CONTROLS ANALYTICS BEHAVIOR
+
 var ctrlAnalytics = {
 
 

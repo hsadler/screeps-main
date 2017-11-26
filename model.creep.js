@@ -4,7 +4,7 @@ var modelGame = require('model.game');
 
 // HOLDS CREEP DATA AND CREEP DATA METHODS
 
-modelCreep = {};
+var modelCreep = {};
 
 
 // constants
@@ -76,11 +76,11 @@ modelCreep.generateCreepTemplates = function() {
 
     var haulerCreepTemplate = creepCount < 4 ?
         modelCreep.BASIC_CREEP_TEMPLATE :
-        modelCreep.GENERAL_CREEP_TEMPLATE;
+        modelCreep.HAULER_CREEP_TEMPLATE;
 
     var minerCreepTemplate = creepCount < 4 ?
         modelCreep.BASIC_CREEP_TEMPLATE :
-        modelCreep.GENERAL_CREEP_TEMPLATE;
+        modelCreep.MINER_CREEP_TEMPLATE;
 
     // generalCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
     // haulerCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
@@ -104,12 +104,12 @@ modelCreep.generateCreepTemplates = function() {
 };
 
 
-// TODO: update to better account for avail energy
 modelCreep.getCreepParts = function(creepTemplate) {
 
     var template = [];
     var cost = 0;
-    var eCapacity = modelGame.totalEnergyCapacity;
+    var minCost = 250;
+    var eCapacity = Math.max(modelGame.getTotalEnergyStored, minCost);
 
     // add items from creep template to result template while affordable
     var i = 0;
