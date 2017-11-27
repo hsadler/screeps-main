@@ -16,17 +16,19 @@ X begin game with haulers acting as harvesters until miner creeps are made
 X create single energy pickup point for upgraders and builders
     X change rest of creeps to pickup dropped energy
 
-recovery system
+X recovery system
     X add logic to build new basic creeps when all have been killed
-    - add 'recovery' mode:
-        1. create conditional for recovery state
-        2. make less upgraders and builders
-        3. upgrade creep more conservatively
 
 X do not create creeps besides miners and haulers until the pickup flag has energy on it
 
-programmatic handling of upgrader, builder creep amount
-    - naive solution: while pickup stockpile > x, make another creep
+X programmatic handling of upgrader, builder creep amount
+    X naive solution: while pickup stockpile > x, make another creep until max amount
+
+convert pickup flag to storage structure
+    - storage model
+    - update hauler, builder, upgrader roles
+
+tower
 
 programmatic extension construction site placement
     - hardcode offset map from Spawn1

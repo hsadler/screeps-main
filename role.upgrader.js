@@ -18,10 +18,7 @@ var roleUpgrader = {
             creep.say('🔄  pickup');
 	    }
         // reached max energy capacity while picking up, change to upgrade mode
-	    if(
-            !creep.memory.upgrading &&
-            creep.carry.energy == creep.carryCapacity
-        ) {
+	    if(this.shouldUpgradeMode(creep)) {
 	        creep.memory.upgrading = true;
 	        creep.say('⚡  upgrade');
 	    }
@@ -57,7 +54,18 @@ var roleUpgrader = {
             }
         }
 
-	}
+	},
+
+
+    shouldUpgradeMode: function(creep) {
+        return (
+            !creep.memory.building &&
+            (
+                creep.carry.energy === creep.carryCapacity ||
+                !modelPickupFlag.energy && creep.carry.energy > 0
+            )
+        );
+    }
 
 
 };

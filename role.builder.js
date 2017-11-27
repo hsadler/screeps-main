@@ -9,6 +9,7 @@ var modelPickupFlag = require('model.pickup_flag');
 
 var roleBuilder = {
 
+
     run: function(creep) {
 
         // ran out of energy while building, change to pickup mode
@@ -17,13 +18,12 @@ var roleBuilder = {
             creep.say('🔄  pickup');
         }
         // at max energy capacity, change to build mode
-        if(
-            !creep.memory.building &&
-            creep.carry.energy == creep.carryCapacity
-        ) {
+        if(this.shouldBuildMode(creep)) {
             creep.memory.building = true;
             creep.say('🚧  build');
         }
+
+        console.log(this.shouldBuildMode(creep));
 
         // build mode
         if(creep.memory.building) {
@@ -64,7 +64,20 @@ var roleBuilder = {
             }
         }
 
+    },
+
+
+    shouldBuildMode: function(creep) {
+        return (
+            !creep.memory.building &&
+            (
+                creep.carry.energy === creep.carryCapacity ||
+                !modelPickupFlag.energy && creep.carry.energy > 0
+            )
+        );
     }
+
+
 };
 
 module.exports = roleBuilder;
