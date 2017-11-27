@@ -25,10 +25,11 @@ modelPickupFlag.getPickupFlagEnergy = function() {
         FIND_DROPPED_RESOURCES,
         {filter: RESOURCE_ENERGY}
     );
-    if(!energy || !energy.pos.isEqualTo(this.flag)) {
+    if(energy && energy.pos.isEqualTo(this.flag)) {
+        return energy;
+    } else {
         return null;
     }
-    return energy;
 };
 
 
