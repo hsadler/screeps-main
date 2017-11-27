@@ -35,7 +35,7 @@ var ctrlAnalytics = {
     displayGameInformation: function() {
 
         var spawn = Game.spawns['Spawn1'];
-        var xPos = 20;
+        var xPos = 30;
         var yPos = spawn.pos.y - 5;
         var infoStyle = {align: 'left', opacity: 0.8};
 
