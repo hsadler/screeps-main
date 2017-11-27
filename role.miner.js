@@ -3,7 +3,7 @@
 var modelEnergySources = require('model.energy_sources');
 
 
-// GOVERNS HARVESTER BEHAVIOR
+// GOVERNS MINER BEHAVIOR
 
 var roleMiner = {
 
