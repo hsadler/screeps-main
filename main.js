@@ -7,6 +7,7 @@ var modelGame = require('model.game');
 var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
 var modelPickupFlag = require('model.pickup_flag');
+var modelStorage = require('model.storage');
 
 // controllers
 var ctrlSpawn = require('ctrl.spawn');
@@ -22,6 +23,7 @@ module.exports.loop = function() {
     modelCreep.proc();
     modelEnergySources.proc();
     modelPickupFlag.proc();
+    modelStorage.proc();
 
     // controller processes
     ctrlSpawn.proc();

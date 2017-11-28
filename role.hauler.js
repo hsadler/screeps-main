@@ -4,6 +4,7 @@ var conf = require('conf');
 // models
 var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
+var modelStorage = require('model.storage');
 
 
 // GOVERNS HAULER BEHAVIOR
@@ -60,16 +61,31 @@ var roleHauler = {
                     );
                 }
             }
-            // move to idle flag
+            // move to pickup
             else {
-                var ePickupFlag = Game.flags[conf.ENERGY_PICKUP_FLAG];
-                if(creep.pos.isEqualTo(ePickupFlag)) {
-                    creep.drop(RESOURCE_ENERGY);
-                } else {
-                    creep.moveTo(
-                        ePickupFlag,
-                        {visualizePathStyle: {stroke: '#ffffff'}}
-                    );
+                // use storage if we have it
+                if(modelStorage.storage) {
+                    if(
+                        creep.transfer(modelStorage.storage, RESOURCE_ENERGY) ===
+                        ERR_NOT_IN_RANGE
+                    ) {
+                        creep.moveTo(
+                            modelStorage.storage,
+                            {visualizePathStyle: {stroke: '#ffffff'}}
+                        );
+                    }
+                }
+                // else, use pickup flag
+                else {
+                    var ePickupFlag = Game.flags[conf.ENERGY_PICKUP_FLAG];
+                    if(creep.pos.isEqualTo(ePickupFlag)) {
+                        creep.drop(RESOURCE_ENERGY);
+                    } else {
+                        creep.moveTo(
+                            ePickupFlag,
+                            {visualizePathStyle: {stroke: '#ffffff'}}
+                        );
+                    }
                 }
             }
         }

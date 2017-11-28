@@ -6,6 +6,7 @@ var conf = require('conf');
 var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
 var modelPickupFlag = require('model.pickup_flag');
+var modelStorage = require('model.storage');
 
 // controllers
 var ctrlCreep = require('ctrl.creep');
@@ -77,23 +78,23 @@ var ctrlSpawn = {
 
 
     shouldSpawnUpgrader: function() {
-        var minPickupFlagEnergy = 25;
+        var minPickupFlagEnergy = 250;
+        var pickupEnergy = modelStorage.storage.store[RESOURCE_ENERGY];
         return (
-            modelPickupFlag.energy &&
-            modelPickupFlag.energy.energy > minPickupFlagEnergy &&
+            pickupEnergy > minPickupFlagEnergy &&
             modelCreep.upgraders.length < conf.MAX_UPGRADERS
         );
     },
 
 
     shouldSpawnBuilder: function() {
-        var spawnRoom = Game.spawns['Spawn1'].room;
-        var minPickupFlagEnergy = 25;
+        var room = Game.spawns['Spawn1'].room;
+        var minPickupFlagEnergy = 250;
+        var pickupEnergy = modelStorage.storage.store[RESOURCE_ENERGY];
         return (
-            modelPickupFlag.energy &&
-            modelPickupFlag.energy.energy > minPickupFlagEnergy &&
+            pickupEnergy > minPickupFlagEnergy &&
             modelCreep.builders.length < conf.MAX_BUILDERS &&
-            spawnRoom.find(FIND_CONSTRUCTION_SITES).length > 0
+            room.find(FIND_CONSTRUCTION_SITES).length > 0
         );
     }
 
