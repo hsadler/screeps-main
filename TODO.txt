@@ -1,9 +1,15 @@
 
-convert pickup flag to storage structure
-    - storage model
-    - update hauler, builder, upgrader roles
+X convert pickup flag to storage structure
+    X storage model
+    X update hauler, builder, upgrader roles
 
-tower
+towers
+    - attack logic
+    - heal logic
+    - repair logic
+
+BUG: haulers indecisive about which extensions to store energy
+    - fix back and forth loop bug
 
 programmatic extension construction site placement
     - hardcode offset map from Spawn1
@@ -15,8 +21,12 @@ analytics system - get insights into:
     - construction/tick
 
 road, walls, rampart building and maintenance
+    - build road on path of haulers and upgraders (they should put down construction sites)
+    - think about programmatic building of walls and ramparts
 
 DEFENSE, DEFENSE, DEFENSE
+
+start thinking about logic-per-room architecture
 
 capture and control of another room
     - claimer creep

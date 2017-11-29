@@ -1,6 +1,5 @@
 
 
-
 // HOLDS STORAGE DATA AND STORAGE DATA METHODS
 
 var modelStorage = {};

@@ -78,10 +78,10 @@ var ctrlSpawn = {
 
 
     shouldSpawnUpgrader: function() {
-        var minPickupFlagEnergy = 250;
+        var minPickupEnergy = 250;
         var pickupEnergy = modelStorage.storage.store[RESOURCE_ENERGY];
         return (
-            pickupEnergy > minPickupFlagEnergy &&
+            pickupEnergy > minPickupEnergy &&
             modelCreep.upgraders.length < conf.MAX_UPGRADERS
         );
     },
@@ -89,10 +89,10 @@ var ctrlSpawn = {
 
     shouldSpawnBuilder: function() {
         var room = Game.spawns['Spawn1'].room;
-        var minPickupFlagEnergy = 250;
+        var minPickupEnergy = 250;
         var pickupEnergy = modelStorage.storage.store[RESOURCE_ENERGY];
         return (
-            pickupEnergy > minPickupFlagEnergy &&
+            pickupEnergy > minPickupEnergy &&
             modelCreep.builders.length < conf.MAX_BUILDERS &&
             room.find(FIND_CONSTRUCTION_SITES).length > 0
         );

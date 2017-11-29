@@ -21,14 +21,16 @@ modelPickupFlag.getFlag = function() {
 
 
 modelPickupFlag.getPickupFlagEnergy = function() {
-    var energy = this.flag.pos.findClosestByRange(
-        FIND_DROPPED_RESOURCES,
-        {filter: RESOURCE_ENERGY}
-    );
-    if(energy && energy.pos.isEqualTo(this.flag)) {
-        return energy;
-    } else {
-        return null;
+    if(this.flag) {
+        var energy = this.flag.pos.findClosestByRange(
+            FIND_DROPPED_RESOURCES,
+            {filter: RESOURCE_ENERGY}
+        );
+        if(energy && energy.pos.isEqualTo(this.flag)) {
+            return energy;
+        } else {
+            return null;
+        }
     }
 };
 

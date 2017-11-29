@@ -8,10 +8,12 @@ var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
 var modelPickupFlag = require('model.pickup_flag');
 var modelStorage = require('model.storage');
+var modelTower = require('model.tower');
 
 // controllers
 var ctrlSpawn = require('ctrl.spawn');
 var ctrlCreep = require('ctrl.creep');
+var ctrlTower = require('ctrl.tower');
 var ctrlConstruction = require('ctrl.construction');
 var ctrlAnalytics = require('ctrl.analytics');
 
@@ -24,10 +26,12 @@ module.exports.loop = function() {
     modelEnergySources.proc();
     modelPickupFlag.proc();
     modelStorage.proc();
+    modelTower.proc();
 
     // controller processes
     ctrlSpawn.proc();
     ctrlCreep.proc();
+    ctrlTower.proc();
     ctrlConstruction.proc();
     ctrlAnalytics.proc();
 
