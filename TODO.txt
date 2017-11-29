@@ -11,6 +11,9 @@ towers
 BUG: haulers indecisive about which extensions to store energy
     - fix back and forth loop bug
 
+BUG: upgrader creep says 'upgrade' every game loop iteration
+    - should be only when switching modes
+
 programmatic extension construction site placement
     - hardcode offset map from Spawn1
 
@@ -27,6 +30,8 @@ road, walls, rampart building and maintenance
 DEFENSE, DEFENSE, DEFENSE
 
 start thinking about logic-per-room architecture
+    - iterate through rooms and do per-room processes
+    - do global processes (creep traveling between rooms, etc.)
 
 capture and control of another room
     - claimer creep

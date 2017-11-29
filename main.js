@@ -3,6 +3,7 @@ var conf = require('conf');
 var utils = require('utils');
 
 // models
+var modelRoom = require('model.room');
 var modelGame = require('model.game');
 var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
@@ -20,20 +21,27 @@ var ctrlAnalytics = require('ctrl.analytics');
 
 module.exports.loop = function() {
 
-    // model processes
-    modelGame.proc();
-    modelCreep.proc();
-    modelEnergySources.proc();
-    modelPickupFlag.proc();
-    modelStorage.proc();
-    modelTower.proc();
+    for(var name in Game.rooms) {
 
-    // controller processes
-    ctrlSpawn.proc();
-    ctrlCreep.proc();
-    ctrlTower.proc();
-    ctrlConstruction.proc();
-    ctrlAnalytics.proc();
+        var room = Game.rooms[name];
+        modelRoom.setRoom(room);
+
+        // model processes
+        modelGame.proc();
+        modelCreep.proc();
+        modelEnergySources.proc();
+        modelPickupFlag.proc();
+        modelStorage.proc();
+        modelTower.proc();
+
+        // controller processes
+        ctrlSpawn.proc();
+        ctrlCreep.proc();
+        ctrlTower.proc();
+        ctrlConstruction.proc();
+        ctrlAnalytics.proc();
+
+    }
 
 };
 
