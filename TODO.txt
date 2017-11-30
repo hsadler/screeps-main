@@ -1,7 +1,8 @@
 
-X convert pickup flag to storage structure
-    X storage model
-    X update hauler, builder, upgrader roles
+start thinking about logic-per-room architecture
+    convert codebase to:
+        - iterate through rooms and do per-room processes
+        - do global processes (creep traveling between rooms, etc.)
 
 towers
     - attack logic
@@ -28,10 +29,6 @@ road, walls, rampart building and maintenance
     - think about programmatic building of walls and ramparts
 
 DEFENSE, DEFENSE, DEFENSE
-
-start thinking about logic-per-room architecture
-    - iterate through rooms and do per-room processes
-    - do global processes (creep traveling between rooms, etc.)
 
 capture and control of another room
     - claimer creep

@@ -1,6 +1,6 @@
 
 
-// HOLDS GAME DATA AND GAME DATA METHODS
+// HOLDS GAME DATA AND GAME DATA METHODS (ALL ROOMS)
 
 var modelGame = {};
 
@@ -8,24 +8,21 @@ var modelGame = {};
 // methods
 
 modelGame.proc = function() {
-    modelGame.extensionStructures = modelGame.getExtensionStructures();
-    modelGame.totalEnergyCapacity = modelGame.getTotalEnergyCapacity();
-    modelGame.totalEnergyStored = modelGame.getTotalEnergyStored();
+    this.extensionStructures = this.getExtensionStructures();
+    this.totalEnergyCapacity = this.getTotalEnergyCapacity();
+    this.totalEnergyStored = this.getTotalEnergyStored();
 };
 
 modelGame.getExtensionStructures = function() {
-    return Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
-            filter: function(structure) {
-                return structure.structureType === STRUCTURE_EXTENSION;
-            }
-        });
+    return _.filter(Game.structures, function(structure) {
+        return structure.structureType === STRUCTURE_EXTENSION;
+    });
 };
 
 modelGame.getTotalEnergyCapacity = function() {
     var sum = 0;
-    sum += Game.spawns['Spawn1'].energyCapacity;
-    modelGame.extensionStructures.forEach(function(extension) {
-        sum += extension.energyCapacity;
+    _.each(Game.rooms, function(room) {
+        sum += room.energyCapacityAvailable;
     });
     return sum;
 };
@@ -33,9 +30,8 @@ modelGame.getTotalEnergyCapacity = function() {
 
 modelGame.getTotalEnergyStored = function() {
     var sum = 0;
-    sum += Game.spawns['Spawn1'].energy;
-    modelGame.extensionStructures.forEach(function(extension) {
-        sum += extension.energy;
+    _.each(Game.rooms, function(room) {
+        sum += room.energyAvailable;
     });
     return sum;
 };

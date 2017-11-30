@@ -28,7 +28,6 @@ module.exports.loop = function() {
     // model processes
     modelGame.proc();
     // controller processes
-    ctrlAnalytics.proc();
 
 
     // room processes
@@ -49,6 +48,7 @@ module.exports.loop = function() {
         ctrlCreep.proc();
         ctrlTower.proc();
         ctrlConstruction.proc();
+        ctrlAnalytics.proc();
 
     }
 
