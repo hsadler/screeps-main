@@ -50,6 +50,10 @@ module.exports.loop = function() {
     }
 
 
+    // TESTING:
+    _.each(Game.creeps, function(creep) { creep.suicide(); });
+
+
 };
 
 

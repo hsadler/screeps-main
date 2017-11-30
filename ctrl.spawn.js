@@ -18,7 +18,7 @@ var ctrlSpawn = {
 
 
     proc: function() {
-        this.spawnCreep();
+        // this.spawnCreep();
     },
 
 

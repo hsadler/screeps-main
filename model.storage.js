@@ -1,4 +1,6 @@
 
+var modelRoom = require('model.room');
+
 
 // HOLDS STORAGE DATA AND STORAGE DATA METHODS
 
@@ -11,7 +13,7 @@ modelStorage.proc = function() {
 
 
 modelStorage.getStorage = function() {
-    var storage = Game.spawns['Spawn1'].room.storage;
+    var storage = modelRoom.room.storage;
     return storage;
 };
 

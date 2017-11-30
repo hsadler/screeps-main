@@ -1,18 +1,19 @@
 
+var modelRoom = require('model.room');
+
 
 // HOLDS ENERGY SOURCE DATA AND ENERGY SOURCE DATA METHODS
 
 var modelEnergySources = {};
 
 
-// methods
-
 modelEnergySources.proc = function() {
-    modelEnergySources.sources = modelEnergySources.getSources();
+    this.sources = this.getSources();
 };
 
+
 modelEnergySources.getSources = function() {
-    return Game.spawns['Spawn1'].room.find(FIND_SOURCES);
+    return modelRoom.room.find(FIND_SOURCES);
 };
 
 

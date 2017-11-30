@@ -1,13 +1,14 @@
 
 var conf = require('conf');
 
+// models
+var modelRoom = require('model.room');
+
 
 // HOLDS PICKUP FLAG DATA AND PICKUP FLAG DATA METHODS
 
 var modelPickupFlag = {};
 
-
-// methods
 
 modelPickupFlag.proc = function() {
     this.flag = this.getFlag();
@@ -16,7 +17,8 @@ modelPickupFlag.proc = function() {
 
 
 modelPickupFlag.getFlag = function() {
-    return Game.flags[conf.ENERGY_PICKUP_FLAG];
+    var flags = modelRoom.room.find(FIND_FLAGS);
+    return flags[conf.ENERGY_PICKUP_FLAG];
 };
 
 
