@@ -19,16 +19,25 @@ var ctrlSpawn = {
 
 
     proc: function() {
-        this.spawnCreep();
+        this.spawnCreeps();
     },
 
 
-    spawnCreep: function() {
+    spawnCreeps: function() {
+        var spawns = modelRoom.room.find(FIND_MY_SPAWNS);
+        var that = this;
+        _.each(spawns, function(spawn) {
+            that.spawnCreepFromSpawn(spawn);
+        });
+    },
+
+
+    spawnCreepFromSpawn: function(spawn) {
 
         // spawn haulers if needed (priority 1)
         if(modelCreep.haulers.length < modelEnergySources.sources.length) {
             var creepName = 'h-' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep(
+            spawn.spawnCreep(
                 modelCreep.haulerCreep,
                 creepName,
                 {memory: {role: 'hauler'}}
@@ -37,7 +46,7 @@ var ctrlSpawn = {
         // spawn miners if needed (priority 2)
         else if(modelCreep.miners.length < modelEnergySources.sources.length) {
             var creepName = 'm-' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep(
+            spawn.spawnCreep(
                 modelCreep.minerCreep,
                 creepName,
                 {memory: {role: 'miner'}}
@@ -46,7 +55,7 @@ var ctrlSpawn = {
         // spawn upgraders if needed (priority 3)
         else if(this.shouldSpawnUpgrader()) {
             var creepName = 'u-' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep(
+            spawn.spawnCreep(
                 modelCreep.upgraderCreep,
                 creepName,
                 {memory: {role: 'upgrader'}}
@@ -55,7 +64,7 @@ var ctrlSpawn = {
         // spawn builders if needed (priority 4)
         else if(this.shouldSpawnBuilder()) {
             var creepName = 'b-' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep(
+            spawn.spawnCreep(
                 modelCreep.builderCreep,
                 creepName,
                 {memory: {role: 'builder'}}
@@ -63,13 +72,13 @@ var ctrlSpawn = {
         }
 
         // show creep spawn message
-        if(Game.spawns['Spawn1'].spawning) {
+        if(spawn.spawning) {
             var spawningCreep =
-                Game.creeps[Game.spawns['Spawn1'].spawning.name];
-            Game.spawns['Spawn1'].room.visual.text(
+                Game.creeps[spawn.spawning.name];
+            spawn.room.visual.text(
                 '🐣 ' + spawningCreep.memory.role,
-                Game.spawns['Spawn1'].pos.x + 1,
-                Game.spawns['Spawn1'].pos.y,
+                spawn.pos.x + 1,
+                spawn.pos.y,
                 {align: 'left', opacity: 0.8});
         }
 
@@ -89,13 +98,12 @@ var ctrlSpawn = {
 
 
     shouldSpawnBuilder: function() {
-        var room = Game.spawns['Spawn1'].room;
         var minPickupEnergy = 250;
         var pickupEnergy = modelStorage.storage.store[RESOURCE_ENERGY];
         return (
             pickupEnergy > minPickupEnergy &&
             modelCreep.builders.length < conf.MAX_BUILDERS &&
-            room.find(FIND_CONSTRUCTION_SITES).length > 0
+            modelRoom.room.find(FIND_CONSTRUCTION_SITES).length > 0
         );
     }
 

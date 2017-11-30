@@ -3,7 +3,7 @@ var conf = {
 
 
     // creep
-    MAX_UPGRADERS: 2,
+    MAX_UPGRADERS: 6,
     MAX_BUILDERS: 1,
 
 

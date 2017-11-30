@@ -9,7 +9,7 @@ start thinking about logic-per-room architecture
             4. modelTower (done)
             5. modelEnergySources (done)
             6. modelPickupFlag (done)
-            7. ctrlSpawn ()
+            7. ctrlSpawn (done)
             8. ctrlCreep
             9. ctrlTower
             10. ctrlConstruction
