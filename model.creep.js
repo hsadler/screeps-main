@@ -82,10 +82,6 @@ modelCreep.generateCreepTemplates = function() {
         modelCreep.BASIC_CREEP_TEMPLATE :
         modelCreep.MINER_CREEP_TEMPLATE;
 
-    // generalCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
-    // haulerCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
-    // minerCreepTemplate = modelCreep.BASIC_CREEP_TEMPLATE;
-
     modelCreep.generalCreep = modelCreep.getCreepParts(
         generalCreepTemplate
     );
@@ -101,6 +97,7 @@ modelCreep.generateCreepTemplates = function() {
     modelCreep.builderCreep = modelCreep.getCreepParts(
         generalCreepTemplate
     );
+
 };
 
 

@@ -19,29 +19,39 @@ var ctrlConstruction = require('ctrl.construction');
 var ctrlAnalytics = require('ctrl.analytics');
 
 
+
 module.exports.loop = function() {
 
+
+    // world processes
+
+    // model processes
+    modelGame.proc();
+    // controller processes
+    ctrlAnalytics.proc();
+
+
+    // room processes
     for(var name in Game.rooms) {
 
         var room = Game.rooms[name];
         modelRoom.setRoom(room);
 
         // model processes
-        modelGame.proc();
         modelCreep.proc();
-        modelEnergySources.proc();
-        modelPickupFlag.proc();
         modelStorage.proc();
         modelTower.proc();
+        modelEnergySources.proc();
+        modelPickupFlag.proc();
 
         // controller processes
         ctrlSpawn.proc();
         ctrlCreep.proc();
         ctrlTower.proc();
         ctrlConstruction.proc();
-        ctrlAnalytics.proc();
 
     }
+
 
 };
 
