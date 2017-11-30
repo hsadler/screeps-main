@@ -107,7 +107,7 @@ modelCreep.getCreepParts = function(creepTemplate) {
     var template = [];
     var cost = 0;
     var minCost = 250;
-    var eStored = Math.max(modelRoom.energyAvailable, minCost);
+    var eStored = Math.max(modelRoom.room.energyAvailable, minCost);
 
     // add items from creep template to result template while affordable
     var i = 0;

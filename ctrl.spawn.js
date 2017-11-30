@@ -3,6 +3,7 @@
 var conf = require('conf');
 
 // models
+var modelRoom = require('model.room');
 var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
 var modelPickupFlag = require('model.pickup_flag');
@@ -18,7 +19,7 @@ var ctrlSpawn = {
 
 
     proc: function() {
-        // this.spawnCreep();
+        this.spawnCreep();
     },
 
 
