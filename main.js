@@ -24,10 +24,7 @@ module.exports.loop = function() {
 
 
     // world processes
-
-    // model processes
     modelGame.proc();
-    // controller processes
 
 
     // room processes

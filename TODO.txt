@@ -3,6 +3,15 @@ start thinking about logic-per-room architecture
     convert codebase to:
         - iterate through rooms and do per-room processes
         - do global processes (creep traveling between rooms, etc.)
+            1. modelGame (done)
+            2. modelCreep
+            3. modelStorage
+            4. modelTower
+            5. modelEnergySources
+            4. modelPickupFlag
+
+creep spawning
+    - continue spawning creep as long as storage is above a certain threshold
 
 towers
     - attack logic

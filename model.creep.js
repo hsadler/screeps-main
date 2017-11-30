@@ -1,13 +1,11 @@
 
-var modelGame = require('model.game');
+var modelRoom = require('model.room');
 
 
 // HOLDS CREEP DATA AND CREEP DATA METHODS
 
 var modelCreep = {};
 
-
-// constants
 
 modelCreep.GENERAL_CREEP_TEMPLATE = [
     MOVE,MOVE,WORK,CARRY,
@@ -42,71 +40,74 @@ modelCreep.BASIC_CREEP_TEMPLATE = [
 ];
 
 
-// methods
-
 modelCreep.proc = function() {
     modelCreep.generateCreepLists();
     modelCreep.generateCreepTemplates();
 };
 
 
+// private
 modelCreep.generateCreepLists = function() {
-    modelCreep.miners = _.filter(Game.creeps, function(creep) {
+    this.creeps = modelRoom.room.find(FIND_MY_CREEPS);
+    this.miners = this.creeps.filter(function(creep) {
         return creep.memory.role == 'miner';
     });
-    modelCreep.haulers = _.filter(Game.creeps, function(creep) {
+    this.haulers = this.creeps.filter(function(creep) {
         return creep.memory.role == 'hauler';
     });
-    modelCreep.upgraders = _.filter(Game.creeps, function(creep) {
+    this.upgraders = this.creeps.filter(function(creep) {
         return creep.memory.role == 'upgrader';
     });
-    modelCreep.builders = _.filter(Game.creeps, function(creep) {
+    this.builders = this.creeps.filter(function(creep) {
         return creep.memory.role == 'builder';
     });
 };
 
 
+// private
 modelCreep.generateCreepTemplates = function() {
 
-    var creepCount = Object.keys(Game.creeps).length;
+    var creepCount = this.creeps.length;
+    var minCreepCountBeforeSpecialization = 4;
 
-    var generalCreepTemplate = creepCount < 4 ?
-        modelCreep.BASIC_CREEP_TEMPLATE :
-        modelCreep.GENERAL_CREEP_TEMPLATE;
+    var generalCreepTemplate = creepCount < minCreepCountBeforeSpecialization ?
+        this.BASIC_CREEP_TEMPLATE :
+        this.GENERAL_CREEP_TEMPLATE;
 
-    var haulerCreepTemplate = creepCount < 4 ?
-        modelCreep.BASIC_CREEP_TEMPLATE :
-        modelCreep.HAULER_CREEP_TEMPLATE;
+    var haulerCreepTemplate = creepCount < minCreepCountBeforeSpecialization ?
+        this.BASIC_CREEP_TEMPLATE :
+        this.HAULER_CREEP_TEMPLATE;
 
-    var minerCreepTemplate = creepCount < 4 ?
-        modelCreep.BASIC_CREEP_TEMPLATE :
-        modelCreep.MINER_CREEP_TEMPLATE;
+    var minerCreepTemplate = creepCount < minCreepCountBeforeSpecialization ?
+        this.BASIC_CREEP_TEMPLATE :
+        this.MINER_CREEP_TEMPLATE;
 
-    modelCreep.generalCreep = modelCreep.getCreepParts(
+    this.generalCreep = this.getCreepParts(
         generalCreepTemplate
     );
-    modelCreep.haulerCreep = modelCreep.getCreepParts(
+    this.haulerCreep = this.getCreepParts(
         haulerCreepTemplate
     );
-    modelCreep.minerCreep = modelCreep.getCreepParts(
+    this.minerCreep = this.getCreepParts(
         minerCreepTemplate
     );
-    modelCreep.upgraderCreep = modelCreep.getCreepParts(
+    this.upgraderCreep = this.getCreepParts(
         generalCreepTemplate
     );
-    modelCreep.builderCreep = modelCreep.getCreepParts(
+    this.builderCreep = this.getCreepParts(
         generalCreepTemplate
     );
 
 };
 
 
+// private
 modelCreep.getCreepParts = function(creepTemplate) {
 
     var template = [];
     var cost = 0;
     var minCost = 250;
-    var eStored = Math.max(modelGame.totalEnergyStored, minCost);
+    var eStored = Math.max(modelRoom.energyAvailable, minCost);
 
     // add items from creep template to result template while affordable
     var i = 0;
