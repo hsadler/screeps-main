@@ -15,19 +15,20 @@ X start thinking about logic-per-room architecture
             10. ctrlConstruction (done)
             11. ctrlAnalytics (done)
 
-creep spawning
-    - continue spawning creep as long as storage is above a certain threshold
+X creep spawning
+    X continue spawning creep as long as storage is above a certain threshold
 
 towers
-    - attack logic
-    - heal logic
-    - repair logic
+    - update haulers to give towers energy
+    X attack logic
+    X heal logic
+    X repair logic
 
 BUG: haulers indecisive about which extensions to store energy
     - fix back and forth loop bug
 
-BUG: upgrader creep says 'upgrade' every game loop iteration
-    - should be only when switching modes
+X BUG: upgrader creep says 'upgrade' every game loop iteration
+    X should be only when switching modes
 
 programmatic extension construction site placement
     - hardcode offset map from Spawn1

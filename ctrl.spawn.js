@@ -88,17 +88,20 @@ var ctrlSpawn = {
 
 
     shouldSpawnUpgrader: function() {
-        var minPickupEnergy = 250;
+        var upgradersAmount = modelCreep.upgraders.length;
+        var minPickupEnergy = 1000;
         var pickupEnergy = modelStorage.storage.store[RESOURCE_ENERGY];
         return (
-            pickupEnergy > minPickupEnergy &&
-            modelCreep.upgraders.length < conf.MAX_UPGRADERS
+            (
+                pickupEnergy > minPickupEnergy &&
+                upgradersAmount < conf.MAX_UPGRADERS
+            ) || upgradersAmount < conf.MIN_UPGRADERS
         );
     },
 
 
     shouldSpawnBuilder: function() {
-        var minPickupEnergy = 250;
+        var minPickupEnergy = 1000;
         var pickupEnergy = modelStorage.storage.store[RESOURCE_ENERGY];
         return (
             pickupEnergy > minPickupEnergy &&
