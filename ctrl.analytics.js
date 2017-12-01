@@ -2,7 +2,7 @@
 var conf = require('conf');
 
 // models
-var modelGame = require('model.game');
+var modelRoom = require('model.room');
 var modelCreep = require('model.creep');
 
 
@@ -34,12 +34,11 @@ var ctrlAnalytics = {
 
     displayGameInformation: function() {
 
-        var spawn = Game.spawns['Spawn1'];
         var xPos = 30;
         var yPos = spawn.pos.y - 5;
         var infoStyle = {align: 'left', opacity: 0.8};
 
-        spawn.room.visual
+        modelRoom.room.visual
 
             // game ticks
             .text(
@@ -63,7 +62,7 @@ var ctrlAnalytics = {
 
             // creep info
             .text(
-                'Total creeps: ' + Object.keys(Game.creeps).length,
+                'Total creeps: ' + modelCreep.creeps.length,
                 xPos, yPos + 1, infoStyle
             )
             .text(
@@ -85,11 +84,11 @@ var ctrlAnalytics = {
 
             // energy info
             .text(
-                'Energy capacity: ' + modelGame.totalEnergyCapacity,
+                'Energy capacity: ' + modelRoom.energyCapacityAvailable,
                 xPos, yPos + 7, infoStyle
             )
             .text(
-                'Energy Stored: ' + modelGame.totalEnergyStored,
+                'Energy Stored: ' + modelRoom.energyAvailable,
                 xPos, yPos + 8, infoStyle
             )
             .text(

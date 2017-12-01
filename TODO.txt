@@ -12,7 +12,7 @@ start thinking about logic-per-room architecture
             7. ctrlSpawn (done)
             8. ctrlCreep (done)
             9. ctrlTower (done)
-            10. ctrlConstruction ()
+            10. ctrlConstruction (done)
             11. ctrlAnalytics ()
 
 creep spawning
