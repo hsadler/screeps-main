@@ -26,6 +26,7 @@ towers
 
 BUG: haulers indecisive about which extensions to store energy
     - fix back and forth loop bug
+    - haulers need closest and highest priority target
 
 X BUG: upgrader creep says 'upgrade' every game loop iteration
     X should be only when switching modes

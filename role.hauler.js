@@ -3,8 +3,11 @@ var conf = require('conf');
 
 // models
 var modelCreep = require('model.creep');
-var modelEnergySources = require('model.energy_sources');
+var modelSpawn = require('model.spawn');
+var modelExtension = require('model.extension');
+var modelTower = require('model.tower');
 var modelStorage = require('model.storage');
+var modelEnergySources = require('model.energy_sources');
 
 
 // GOVERNS HAULER BEHAVIOR
@@ -40,23 +43,39 @@ var roleHauler = {
 
         // delivering mode
         if(creep.memory.delivering) {
+
+            // TODO: choose priority structure closest to hauler creep as target
+
             // get targets with available capacity
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (
-                        structure.structureType === STRUCTURE_EXTENSION ||
-                        structure.structureType === STRUCTURE_SPAWN
-                    ) && structure.energy < structure.energyCapacity;
-                }
+            var availSpawns = _.filter(modelSpawn.spawns, (spawn) => {
+                return spawn.energy < spawn.energyCapacity;
             });
+            var availExtensions = _.filter(modelExtension.extensions,
+                (extension) => {
+                    return extension.energy < extension.energyCapacity;
+                });
+            var availTowers = _.filter(modelTower.towers, (tower) => {
+                return tower.energy < tower.energyCapacity;
+            });
+
+            // set priority target
+            var target;
+            if(availSpawns.length > 0) {
+                target = availSpawns[0];
+            } else if(availExtensions.length > 0) {
+                target = availExtensions[0];
+            } else if(availTowers.length > 0) {
+                target = availTowers[0];
+            }
+
             // target with capacity exists
-            if(targets.length > 0) {
+            if(target) {
                 if(
-                    creep.transfer(targets[0], RESOURCE_ENERGY) ==
+                    creep.transfer(target, RESOURCE_ENERGY) ===
                     ERR_NOT_IN_RANGE
                 ) {
                     creep.moveTo(
-                        targets[0],
+                        target,
                         {visualizePathStyle: {stroke: '#ffffff'}}
                     );
                 }

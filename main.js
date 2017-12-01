@@ -3,13 +3,15 @@ var conf = require('conf');
 var utils = require('utils');
 
 // models
-var modelRoom = require('model.room');
 var modelGame = require('model.game');
+var modelRoom = require('model.room');
+var modelSpawn = require('model.spawn');
+var modelExtension = require('model.extension');
+var modelStorage = require('model.storage');
+var modelTower = require('model.tower');
 var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
 var modelPickupFlag = require('model.pickup_flag');
-var modelStorage = require('model.storage');
-var modelTower = require('model.tower');
 
 // controllers
 var ctrlSpawn = require('ctrl.spawn');
@@ -34,9 +36,11 @@ module.exports.loop = function() {
         modelRoom.setRoom(room);
 
         // model processes
-        modelCreep.proc();
+        modelSpawn.proc();
+        modelExtension.proc();
         modelStorage.proc();
         modelTower.proc();
+        modelCreep.proc();
         modelEnergySources.proc();
         modelPickupFlag.proc();
 
