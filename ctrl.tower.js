@@ -1,4 +1,7 @@
 
+// models
+var modelRoom = require('model.room');
+
 
 // CONTROLS TOWER BEHAVIOR
 
