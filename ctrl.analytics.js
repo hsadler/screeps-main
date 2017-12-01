@@ -34,8 +34,12 @@ var ctrlAnalytics = {
 
     displayGameInformation: function() {
 
+        var spawns = _.map(
+            modelRoom.room.find(FIND_MY_SPAWNS),
+            function(spawn) { return spawn; }
+        );
         var xPos = 30;
-        var yPos = spawn.pos.y - 5;
+        var yPos = spawns[0].pos.y - 5;
         var infoStyle = {align: 'left', opacity: 0.8};
 
         modelRoom.room.visual
@@ -84,11 +88,11 @@ var ctrlAnalytics = {
 
             // energy info
             .text(
-                'Energy capacity: ' + modelRoom.energyCapacityAvailable,
+                'Energy capacity: ' + modelRoom.room.energyCapacityAvailable,
                 xPos, yPos + 7, infoStyle
             )
             .text(
-                'Energy Stored: ' + modelRoom.energyAvailable,
+                'Energy Stored: ' + modelRoom.room.energyAvailable,
                 xPos, yPos + 8, infoStyle
             )
             .text(
