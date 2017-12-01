@@ -18,18 +18,24 @@ X start thinking about logic-per-room architecture
 X creep spawning
     X continue spawning creep as long as storage is above a certain threshold
 
-towers
-    - update haulers to give towers energy
+X towers
+    X update haulers to give towers energy
     X attack logic
     X heal logic
     X repair logic
 
-BUG: haulers indecisive about which extensions to store energy
-    - fix back and forth loop bug
-    - haulers need closest and highest priority target
+road, walls, rampart building and maintenance
+    - build road on path of haulers and upgraders (they should put down construction sites)
+    - or build roads based on calculated path via API
+    - think about programmatic building of walls and ramparts
 
-X BUG: upgrader creep says 'upgrade' every game loop iteration
-    X should be only when switching modes
+DEFENSE, DEFENSE, DEFENSE
+    - think about 'defense' mode
+    - defense creeps with attack bodyparts
+
+BUG: haulers indecisive about which extensions to store energy
+    X fix back and forth loop bug
+    - haulers need closest and highest priority target
 
 programmatic extension construction site placement
     - hardcode offset map from Spawn1
@@ -39,12 +45,6 @@ analytics system - get insights into:
     - storage/tick
     - controller upgrade/tick
     - construction/tick
-
-road, walls, rampart building and maintenance
-    - build road on path of haulers and upgraders (they should put down construction sites)
-    - think about programmatic building of walls and ramparts
-
-DEFENSE, DEFENSE, DEFENSE
 
 capture and control of another room
     - claimer creep
