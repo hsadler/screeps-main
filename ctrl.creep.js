@@ -1,6 +1,6 @@
 
 // models
-var modelGame = require('model.game');
+var modelRoom = require('model.room');
 var modelCreep = require('model.creep');
 
 // roles
@@ -23,14 +23,12 @@ var ctrlCreep = {
 
     // TODO: maybe refactor to use list of creep roles set in config or creep model
     assignCreepRoles: function() {
-        if(Object.keys(Game.creeps).length < 4) {
-            for(var name in Game.creeps) {
-                var creep = Game.creeps[name];
+        if(modelCreep.creeps.length < 4) {
+            _.each(modelCreep.creeps, function(creep) {
                 roleHarvester.run(creep);
-            }
+            });
         } else {
-            for(var name in Game.creeps) {
-                var creep = Game.creeps[name];
+            _.each(modelCreep.creeps, function(creep) {
                 if(creep.memory.role == 'miner') {
                     roleMiner.run(creep);
                 } else if(creep.memory.role == 'hauler') {
@@ -42,7 +40,7 @@ var ctrlCreep = {
                 } else if(creep.memory.role == 'builder') {
                     roleBuilder.run(creep);
                 }
-            }
+            });
         }
     },
 

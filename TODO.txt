@@ -10,10 +10,10 @@ start thinking about logic-per-room architecture
             5. modelEnergySources (done)
             6. modelPickupFlag (done)
             7. ctrlSpawn (done)
-            8. ctrlCreep
-            9. ctrlTower
-            10. ctrlConstruction
-            11. ctrlAnalytics
+            8. ctrlCreep (done)
+            9. ctrlTower ()
+            10. ctrlConstruction ()
+            11. ctrlAnalytics ()
 
 creep spawning
     - continue spawning creep as long as storage is above a certain threshold
