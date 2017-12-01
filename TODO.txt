@@ -1,8 +1,8 @@
 
-start thinking about logic-per-room architecture
+X start thinking about logic-per-room architecture
     convert codebase to:
-        - iterate through rooms and do per-room processes
-        - do global processes (creep traveling between rooms, etc.)
+        X iterate through rooms and do per-room processes
+        X do global processes (creep traveling between rooms, etc.)
             1. modelGame (done)
             2. modelCreep (done)
             3. modelStorage (done)
@@ -13,7 +13,7 @@ start thinking about logic-per-room architecture
             8. ctrlCreep (done)
             9. ctrlTower (done)
             10. ctrlConstruction (done)
-            11. ctrlAnalytics ()
+            11. ctrlAnalytics (done)
 
 creep spawning
     - continue spawning creep as long as storage is above a certain threshold

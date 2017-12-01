@@ -25,14 +25,14 @@ var roleHauler = {
         }
 
         // ran out of energy while delivering, change to haul mode
-        if(creep.memory.delivering && creep.carry.energy == 0) {
+        if(creep.memory.delivering && creep.carry.energy === 0) {
             creep.memory.delivering = false;
             creep.say('🔄  pickup');
         }
         // reached max energy capacity while picking up, change to deliver mode
         if(
             !creep.memory.delivering &&
-            creep.carry.energy == creep.carryCapacity
+            creep.carry.energy === creep.carryCapacity
         ) {
             creep.memory.delivering = true;
             creep.say('⚡  deliver');
@@ -44,8 +44,8 @@ var roleHauler = {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (
-                        structure.structureType == STRUCTURE_EXTENSION ||
-                        structure.structureType == STRUCTURE_SPAWN
+                        structure.structureType === STRUCTURE_EXTENSION ||
+                        structure.structureType === STRUCTURE_SPAWN
                     ) && structure.energy < structure.energyCapacity;
                 }
             });
@@ -111,7 +111,7 @@ var roleHauler = {
             // else, act as harvester
             else {
                 var sources = modelEnergySources.sources;
-                if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                if(creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(
                         sources[0],
                         {visualizePathStyle: {stroke: '#ffaa00'}}

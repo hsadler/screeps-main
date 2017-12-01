@@ -19,7 +19,7 @@ var roleMiner = {
         var source = Game.getObjectById(creep.memory.sourceId);
         // if source exists, harvest, otherwise throw error
         if(source) {
-            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+            if(creep.harvest(source) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(
                     source,
                     {visualizePathStyle: {stroke: '#ffaa00'}}

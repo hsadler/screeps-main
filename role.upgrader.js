@@ -14,7 +14,7 @@ var roleUpgrader = {
     run: function(creep) {
 
         // ran out of energy while upgrading, change to pickup mode
-        if(creep.memory.upgrading && creep.carry.energy == 0) {
+        if(creep.memory.upgrading && creep.carry.energy === 0) {
             creep.memory.upgrading = false;
             creep.say('🔄  pickup');
 	    }
@@ -27,7 +27,7 @@ var roleUpgrader = {
         // upgrading mode
 	    if(creep.memory.upgrading) {
             if(
-                creep.upgradeController(creep.room.controller) ==
+                creep.upgradeController(creep.room.controller) ===
                 ERR_NOT_IN_RANGE
             ) {
                 creep.moveTo(
@@ -81,7 +81,7 @@ var roleUpgrader = {
 
     shouldUpgradeMode: function(creep) {
         return (
-            !creep.memory.building &&
+            !creep.memory.upgrading &&
             (
                 creep.carry.energy === creep.carryCapacity ||
                 !modelPickupFlag.energy && creep.carry.energy > 0

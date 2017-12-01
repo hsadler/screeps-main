@@ -50,16 +50,16 @@ modelCreep.proc = function() {
 modelCreep.generateCreepLists = function() {
     this.creeps = modelRoom.room.find(FIND_MY_CREEPS);
     this.miners = this.creeps.filter(function(creep) {
-        return creep.memory.role == 'miner';
+        return creep.memory.role === 'miner';
     });
     this.haulers = this.creeps.filter(function(creep) {
-        return creep.memory.role == 'hauler';
+        return creep.memory.role === 'hauler';
     });
     this.upgraders = this.creeps.filter(function(creep) {
-        return creep.memory.role == 'upgrader';
+        return creep.memory.role === 'upgrader';
     });
     this.builders = this.creeps.filter(function(creep) {
-        return creep.memory.role == 'builder';
+        return creep.memory.role === 'builder';
     });
 };
 

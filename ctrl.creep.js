@@ -29,15 +29,15 @@ var ctrlCreep = {
             });
         } else {
             _.each(modelCreep.creeps, function(creep) {
-                if(creep.memory.role == 'miner') {
+                if(creep.memory.role === 'miner') {
                     roleMiner.run(creep);
-                } else if(creep.memory.role == 'hauler') {
+                } else if(creep.memory.role === 'hauler') {
                     roleHauler.run(creep);
-                } else if(creep.memory.role == 'upgrader') {
+                } else if(creep.memory.role === 'upgrader') {
                     roleUpgrader.run(creep);
-                } else if(creep.memory.role == 'upgrader') {
+                } else if(creep.memory.role === 'upgrader') {
                     roleUpgrader.run(creep);
-                } else if(creep.memory.role == 'builder') {
+                } else if(creep.memory.role === 'builder') {
                     roleBuilder.run(creep);
                 }
             });
