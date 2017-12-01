@@ -11,7 +11,7 @@ start thinking about logic-per-room architecture
             6. modelPickupFlag (done)
             7. ctrlSpawn (done)
             8. ctrlCreep (done)
-            9. ctrlTower ()
+            9. ctrlTower (done)
             10. ctrlConstruction ()
             11. ctrlAnalytics ()
 
