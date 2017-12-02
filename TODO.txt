@@ -14,8 +14,8 @@ X start thinking about logic-per-room architecture
             9. ctrlTower (done)
             10. ctrlConstruction (done)
             11. ctrlAnalytics (done)
-            12. roleMiner ()
-            13. roleHauler
+            12. roleMiner (done)
+            13. roleHauler (done)
             14. roleUpgrader
             15. roleBuilder
 

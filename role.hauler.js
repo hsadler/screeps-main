@@ -7,6 +7,7 @@ var modelCreep = require('model.creep');
 var modelSpawn = require('model.spawn');
 var modelExtension = require('model.extension');
 var modelTower = require('model.tower');
+var modelPickupFlag = require('model.pickup_flag');
 var modelStorage = require('model.storage');
 var modelEnergySources = require('model.energy_sources');
 
@@ -95,7 +96,7 @@ var roleHauler = {
                 }
                 // else, use pickup flag
                 else {
-                    var ePickupFlag = Game.flags[conf.ENERGY_PICKUP_FLAG];
+                    var ePickupFlag = modelPickupFlag.flag;
                     if(creep.pos.isEqualTo(ePickupFlag)) {
                         creep.drop(RESOURCE_ENERGY);
                     } else {
@@ -143,13 +144,9 @@ var roleHauler = {
 
     getUnassignedMiner: function() {
         // get list of ids for assigned miner creeps
-        var assignedMinerIds = [];
-        for(var name in Game.creeps) {
-            var creep = Game.creeps[name];
-            if(creep.memory.minerId) {
-                assignedMinerIds.push(creep.memory.minerId);
-            }
-        }
+        var assignedMinerIds = modelCreep.haulers.filter((creep) => {
+            return creep.memory.minerId;
+        });
         // get list of unassigned miners by subtracting assigned
         // miners from total miners
         var unassignedMiners = modelCreep.miners
