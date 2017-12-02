@@ -1,5 +1,6 @@
 
 var conf = require('conf');
+var utils = require('utils');
 
 // models
 var modelCreep = require('model.creep');
@@ -23,7 +24,7 @@ var roleHauler = {
             if(miner) {
                 creep.memory.minerId = miner.id;
             } else {
-                creep.memory.minerId = null
+                creep.memory.minerId = null;
             }
         }
 
@@ -44,8 +45,6 @@ var roleHauler = {
         // delivering mode
         if(creep.memory.delivering) {
 
-            // TODO: choose priority structure closest to hauler creep as target
-
             // get targets with available capacity
             var availSpawns = _.filter(modelSpawn.spawns, (spawn) => {
                 return spawn.energy < spawn.energyCapacity;
@@ -58,14 +57,14 @@ var roleHauler = {
                 return tower.energy < tower.energyCapacity;
             });
 
-            // set priority target
+            // set priority group and closest target of group
             var target;
             if(availSpawns.length > 0) {
-                target = availSpawns[0];
+                target = this.getClosestTargetOfTargets(availSpawns);
             } else if(availExtensions.length > 0) {
-                target = availExtensions[0];
+                target = this.getClosestTargetOfTargets(availExtensions);
             } else if(availTowers.length > 0) {
-                target = availTowers[0];
+                target = this.getClosestTargetOfTargets(availTowers);
             }
 
             // target with capacity exists
@@ -163,6 +162,23 @@ var roleHauler = {
         } else {
             return null;
         }
+    },
+
+
+    getClosestTargetOfTargets: function(pos, targets) {
+        var closest;
+        var closestDistance;
+        var currTargetDistance;
+        _.each(targets, (target) => {
+            if(!closest) {
+                closest = target;
+            } else {
+                closestDistance = utils.getDistance(pos, closest.pos);
+                currTargetDistance = utils.getDistance(pos, target.pos);
+                if(currTargetDistance < closestDistance) closest = target;
+            }
+        });
+        return closest;
     }
 
 

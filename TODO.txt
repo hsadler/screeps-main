@@ -33,9 +33,9 @@ DEFENSE, DEFENSE, DEFENSE
     - think about 'defense' mode
     - defense creeps with attack bodyparts
 
-BUG: haulers indecisive about which extensions to store energy
+X BUG: haulers indecisive about which extensions to store energy
     X fix back and forth loop bug
-    - haulers need closest and highest priority target
+    X haulers need closest and highest priority target (needs testing)
 
 programmatic extension construction site placement
     - hardcode offset map from Spawn1
