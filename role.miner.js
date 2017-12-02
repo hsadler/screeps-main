@@ -1,5 +1,7 @@
 
 // models
+var modelRoom = require('model.room');
+var modelCreep = require('model.creep');
 var modelEnergySources = require('model.energy_sources');
 
 
@@ -32,13 +34,9 @@ var roleMiner = {
 
     getUnminedSource: function() {
         // get list of ids for assigned energy sources
-        var assignedSourceIds = [];
-        for(var name in Game.creeps) {
-            var creep = Game.creeps[name];
-            if(creep.memory.sourceId) {
-                assignedSourceIds.push(creep.memory.sourceId);
-            }
-        }
+        var assignedSourceIds = modelCreep.creeps.filter((creep) => {
+            return creep.memory.sourceId;
+        }).map((creep) => { return creep.memory.sourceId; });
         // get list of unmined energy sources by subtracting assigned
         // energy sources from total energy sources
         var unminedSources = modelEnergySources.sources
