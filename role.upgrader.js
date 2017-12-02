@@ -14,6 +14,7 @@ var roleUpgrader = {
 
     run: function(creep) {
 
+        // get idle creep flag
         var roomFlags = modelRoom.room.find(FIND_FLAGS);
         var idleCreepFlag = _.find(roomFlags, (flag) => {
             return flag.name = conf.IDLE_CREEP_FLAG;

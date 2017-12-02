@@ -13,6 +13,12 @@ var roleBuilder = {
 
     run: function(creep) {
 
+        // get idle creep flag
+        var roomFlags = modelRoom.room.find(FIND_FLAGS);
+        var idleCreepFlag = _.find(roomFlags, (flag) => {
+            return flag.name = conf.IDLE_CREEP_FLAG;
+        });
+
         // ran out of energy while building, change to pickup mode
         if(creep.memory.building && creep.carry.energy === 0) {
             creep.memory.building = false;
@@ -39,7 +45,7 @@ var roleBuilder = {
             // move to idle flag
             else {
                 creep.moveTo(
-                    Game.flags[conf.IDLE_CREEP_FLAG],
+                    idleCreepFlag,
                     {visualizePathStyle: {stroke: '#ffaa00'}}
                 );
             }
@@ -59,7 +65,7 @@ var roleBuilder = {
                     }
                 } else {
                     creep.moveTo(
-                        Game.flags[conf.IDLE_CREEP_FLAG],
+                        idleCreepFlag,
                         {visualizePathStyle: {stroke: '#ffaa00'}}
                     );
                 }
@@ -70,7 +76,7 @@ var roleBuilder = {
                 var energy = modelPickupFlag.energy;
                 if(!energy) {
                     creep.moveTo(
-                        Game.flags[conf.IDLE_CREEP_FLAG],
+                        idleCreepFlag,
                         {visualizePathStyle: {stroke: '#ffaa00'}}
                     );
                 } else if(creep.pos.isNearTo(ePickupFlag)) {

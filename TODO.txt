@@ -16,8 +16,8 @@ X start thinking about logic-per-room architecture
             11. ctrlAnalytics (done)
             12. roleMiner (done)
             13. roleHauler (done)
-            14. roleUpgrader
-            15. roleBuilder
+            14. roleUpgrader (done)
+            15. roleBuilder (done)
 
 road, walls, rampart building and maintenance
     - build road on path of haulers and upgraders (they should put down construction sites)
