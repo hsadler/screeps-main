@@ -60,11 +60,11 @@ var roleHauler = {
             // set priority group and closest target of group
             var target;
             if(availSpawns.length > 0) {
-                target = this.getClosestTargetOfTargets(availSpawns);
+                target = this.getClosestTargetOfTargets(creep.pos, availSpawns);
             } else if(availExtensions.length > 0) {
-                target = this.getClosestTargetOfTargets(availExtensions);
+                target = this.getClosestTargetOfTargets(creep.pos, availExtensions);
             } else if(availTowers.length > 0) {
-                target = this.getClosestTargetOfTargets(availTowers);
+                target = this.getClosestTargetOfTargets(creep.pos. availTowers);
             }
 
             // target with capacity exists
