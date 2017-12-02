@@ -1,6 +1,7 @@
 var conf = require('conf');
 
 // models
+var modelRoom = require('model.room');
 var modelEnergySources = require('model.energy_sources');
 var modelPickupFlag = require('model.pickup_flag');
 var modelStorage = require('model.storage');
@@ -12,6 +13,11 @@ var roleUpgrader = {
 
 
     run: function(creep) {
+
+        var roomFlags = modelRoom.room.find(FIND_FLAGS);
+        var idleCreepFlag = _.find(roomFlags, (flag) => {
+            return flag.name = conf.IDLE_CREEP_FLAG;
+        });
 
         // ran out of energy while upgrading, change to pickup mode
         if(creep.memory.upgrading && creep.carry.energy === 0) {
@@ -51,7 +57,7 @@ var roleUpgrader = {
                     }
                 } else {
                     creep.moveTo(
-                        Game.flags[conf.IDLE_CREEP_FLAG],
+                        idleCreepFlag,
                         {visualizePathStyle: {stroke: '#ffaa00'}}
                     );
                 }
@@ -62,7 +68,7 @@ var roleUpgrader = {
                 var energy = modelPickupFlag.energy;
                 if(!energy) {
                     creep.moveTo(
-                        Game.flags[conf.IDLE_CREEP_FLAG],
+                        idleCreepFlag,
                         {visualizePathStyle: {stroke: '#ffaa00'}}
                     );
                 } else if(creep.pos.isNearTo(ePickupFlag)) {

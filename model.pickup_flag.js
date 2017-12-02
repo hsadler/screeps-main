@@ -18,7 +18,9 @@ modelPickupFlag.proc = function() {
 
 modelPickupFlag.getFlag = function() {
     var flags = modelRoom.room.find(FIND_FLAGS);
-    return flags[conf.ENERGY_PICKUP_FLAG];
+    return _.find(flags, (flag) => {
+        return flag.name = conf.ENERGY_PICKUP_FLAG;
+    });
 };
 
 
