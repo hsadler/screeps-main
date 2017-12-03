@@ -1,26 +1,7 @@
 
-X start thinking about logic-per-room architecture
-    convert codebase to:
-        X iterate through rooms and do per-room processes
-        X do global processes (creep traveling between rooms, etc.)
-            1. modelGame (done)
-            2. modelCreep (done)
-            3. modelStorage (done)
-            4. modelTower (done)
-            5. modelEnergySources (done)
-            6. modelPickupFlag (done)
-            7. ctrlSpawn (done)
-            8. ctrlCreep (done)
-            9. ctrlTower (done)
-            10. ctrlConstruction (done)
-            11. ctrlAnalytics (done)
-            12. roleMiner (done)
-            13. roleHauler (done)
-            14. roleUpgrader (done)
-            15. roleBuilder (done)
-
 road, walls, rampart building and maintenance
     - build road on path of haulers and upgraders (they should put down construction sites)
+    - or, take path from algo and plot roads on that
     - or build roads based on calculated path via API
     - think about programmatic building of walls and ramparts
 
