@@ -144,7 +144,7 @@ var roleHauler = {
 
     getUnassignedMiner: function() {
         // get list of ids for assigned miner creeps
-        var assignedMinerIds = modelCreep.haulers.filter((creep) => {
+        var assignedMinerIds = modelCreep.haulers.map((creep) => {
             return creep.memory.minerId;
         });
         // get list of unassigned miners by subtracting assigned
