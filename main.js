@@ -18,6 +18,7 @@ var ctrlSpawn = require('ctrl.spawn');
 var ctrlCreep = require('ctrl.creep');
 var ctrlTower = require('ctrl.tower');
 var ctrlConstruction = require('ctrl.construction');
+var ctrlRoad = require('ctrl.road');
 var ctrlAnalytics = require('ctrl.analytics');
 
 
@@ -48,6 +49,7 @@ module.exports.loop = function() {
         ctrlCreep.proc();
         ctrlTower.proc();
         ctrlConstruction.proc();
+        ctrlRoad.proc();
         ctrlAnalytics.proc();
 
     }
