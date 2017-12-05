@@ -4,6 +4,7 @@ var modelSpawn = require('model.spawn');
 var modelEnergySources = require('model.energy_sources');
 var modelExtension = require('model.extension');
 var modelStorage = require('model.storage');
+var modelTower = require('model.tower');
 
 
 // CONTROLS ROAD BEHAVIOR
@@ -12,14 +13,6 @@ var ctrlRoad = {
 
 
     proc: function() {
-
-        // TESTING:
-        // var path = modelRoom.room.findPath(
-        //     modelStorage.storage.pos,
-        //     modelRoom.room.controller.pos
-        // );
-        // console.log(JSON.stringify(path));
-
         this.constructRoomRoads();
     },
 
@@ -38,38 +31,80 @@ var ctrlRoad = {
         // all paths to check for road construction
         var paths = [];
         // road construction site to be set
-        var nextRoadConstructionSite = null;
+        var nextPos = null;
         // spawn to use as path point
         var primarySpawn = modelSpawn.spawns[0];
 
         // add paths from energy sources to primary spawn
         modelEnergySources.sources.forEach((source) => {
-            paths.push(modelRoom.room.findPath(source.pos, primarySpawn.pos));
+            paths.push(
+                modelRoom.room.findPath(source.pos, primarySpawn.pos)
+            );
         });
 
         // add paths from energy sources to storage
         modelEnergySources.sources.forEach((source) => {
-            paths.push(modelRoom.room.findPath(source.pos, modelStorage.storage.pos));
+            paths.push(
+                modelRoom.room.findPath(source.pos, modelStorage.storage.pos)
+            );
         });
 
         // add path from storage to controller
-        paths.push(modelRoom.room.findPath(modelStorage.storage.pos, modelRoom.room.controller));
+        paths.push(
+            modelRoom.room.findPath(
+                modelStorage.storage.pos,
+                modelRoom.room.controller
+            )
+        );
+
 
         // TODO: add paths from storage to exits to owned rooms here...
+        // maybe needs to be implemented in a world process rather than a room
+        // process
 
-        // get next available construction position from paths, and construct if exists
-        nextRoadConstructionSitePos = this.getNextAvailableRoadConstructionPositionFromPaths(paths);
-        if(nextRoadConstructionSite) {
-            modelRoom.room.creatConstructionSite(nextRoadConstructionSitePos, STRUCTURE_ROAD);
+
+        // get next available construction position from paths
+        // construct if exists
+        nextPos = this.getNextAvailableRoadConstrPositionFromPaths(paths);
+        if(nextPos) {
+            modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
             return;
         }
 
-        // left off here..
+        // get next available construction position from extensions
+        // construct if exists
+        nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
+            modelExtension.extensions
+        );
+        if(nextPos) {
+            modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
+            return;
+        }
+
+        // get next available construction position from towers
+        // construct if exists
+        nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
+            modelTower.towers
+        );
+        if(nextPos) {
+            modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
+            return;
+        }
+
+        // get next available construction position from spawns
+        // construct if exists
+        nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
+            modelSpawn.spawns
+        );
+        if(nextPos) {
+            modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
+            return;
+        }
 
     },
 
 
-    getNextAvailableRoadConstructionPositionFromPaths: function(paths) {
+    getNextAvailableRoadConstrPositionFromPaths: function(paths) {
         // for path in paths:
         //     for pos in path:
         //         if not pos.hasStructureOrConstructionSite():
@@ -78,7 +113,7 @@ var ctrlRoad = {
     },
 
 
-    getNextAvailableRoadConstructionPositionFromStructures: function(structures) {
+    getNextAvailableRoadConstrPositionFromStructures: function(structures) {
         // for structure in structures:
         //     for pos in structure.getSurroundingPositions():
         //         if not pos.hasStructureOrConstructionSite:
