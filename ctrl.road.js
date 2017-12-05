@@ -13,6 +13,13 @@ var ctrlRoad = {
 
 
     proc: function() {
+
+        // var path = modelRoom.room.findPath(
+        //     modelEnergySources.sources[0].pos,
+        //     modelEnergySources.sources[1].pos
+        // );
+        // console.log(JSON.stringify(path));
+
         this.constructRoomRoads();
     },
 
@@ -53,7 +60,7 @@ var ctrlRoad = {
         paths.push(
             modelRoom.room.findPath(
                 modelStorage.storage.pos,
-                modelRoom.room.controller
+                modelRoom.room.controller.pos
             )
         );
 
@@ -63,43 +70,56 @@ var ctrlRoad = {
         // process
 
 
-        // get next available construction position from paths
-        // construct if exists
-        nextPos = this.getNextAvailableRoadConstrPositionFromPaths(paths);
-        if(nextPos) {
-            modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
-            return;
-        }
+        paths.forEach((path) => {
+            path.forEach((pathPoint) => {
+                // console.log('pathPoint: ', JSON.stringify(pathPoint));
+                var pos = modelRoom.room.getPositionAt(
+                    pathPoint.x, pathPoint.y
+                );
+                // DEBUG: left off here...
+                // if(modelRoom.room.createConstructionSite(pos, STRUCTURE_ROAD) === OK) {
+                //     return;
+                // }
+            });
+        });
 
-        // get next available construction position from extensions
-        // construct if exists
-        nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
-            modelExtension.extensions
-        );
-        if(nextPos) {
-            modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
-            return;
-        }
+        // // get next available construction position from paths
+        // // construct if exists
+        // nextPos = this.getNextAvailableRoadConstrPositionFromPaths(paths);
+        // if(nextPos) {
+        //     modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
+        //     return;
+        // }
 
-        // get next available construction position from towers
-        // construct if exists
-        nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
-            modelTower.towers
-        );
-        if(nextPos) {
-            modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
-            return;
-        }
+        // // get next available construction position from extensions
+        // // construct if exists
+        // nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
+        //     modelExtension.extensions
+        // );
+        // if(nextPos) {
+        //     modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
+        //     return;
+        // }
 
-        // get next available construction position from spawns
-        // construct if exists
-        nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
-            modelSpawn.spawns
-        );
-        if(nextPos) {
-            modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
-            return;
-        }
+        // // get next available construction position from towers
+        // // construct if exists
+        // nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
+        //     modelTower.towers
+        // );
+        // if(nextPos) {
+        //     modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
+        //     return;
+        // }
+
+        // // get next available construction position from spawns
+        // // construct if exists
+        // nextPos = this.getNextAvailableRoadConstrPositionFromStructures(
+        //     modelSpawn.spawns
+        // );
+        // if(nextPos) {
+        //     modelRoom.room.creatConstructionSite(nextPos, STRUCTURE_ROAD);
+        //     return;
+        // }
 
     },
 
@@ -111,8 +131,12 @@ var ctrlRoad = {
         //             return pos
         // return null
         paths.forEach((path) => {
-            path.forEach((pos) => {
-                console.log('path pos: ', pos);
+            path.forEach((pathPoint) => {
+                // console.log('pathPoint: ', JSON.stringify(pathPoint));
+                var pos = modelRoom.room.getPositionAt(
+                    pathPoint.x, pathPoint.y
+                );
+
             });
         });
     },
