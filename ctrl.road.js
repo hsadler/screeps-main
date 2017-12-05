@@ -110,6 +110,11 @@ var ctrlRoad = {
         //         if not pos.hasStructureOrConstructionSite():
         //             return pos
         // return null
+        paths.forEach((path) => {
+            path.forEach((pos) => {
+                console.log('path pos: ', pos);
+            });
+        });
     },
 
 
