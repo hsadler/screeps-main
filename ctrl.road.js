@@ -12,6 +12,12 @@ var modelTower = require('model.tower');
 var ctrlRoad = {
 
 
+    PATHS_ENERGY_SOURCES_TO_SPAWN: 1,
+    PATHS_ENERGY_SOURCES_TO_STORAGE: 2,
+    PATH_STORAGE_TO_CONTROLLER: 3,
+    PATHS_STORAGE_TO_EXITS: 4,
+
+
     proc: function() {
 
         // var path = modelRoom.room.findPath(
@@ -20,7 +26,11 @@ var ctrlRoad = {
         // );
         // console.log(JSON.stringify(path));
 
-        this.constructRoomRoads();
+        // find or create road paths in memory
+        this.roadPaths = this.findOrCreateRoadPaths();
+        // create construction site
+        this.createNewRoadConstructionSite();
+
     },
 
 
@@ -37,8 +47,6 @@ var ctrlRoad = {
 
         // all paths to check for road construction
         var paths = [];
-        // road construction site to be set
-        var nextPos = null;
         // spawn to use as path point
         var primarySpawn = modelSpawn.spawns[0];
 
@@ -70,18 +78,18 @@ var ctrlRoad = {
         // process
 
 
-        paths.forEach((path) => {
-            path.forEach((pathPoint) => {
-                // console.log('pathPoint: ', JSON.stringify(pathPoint));
-                var pos = modelRoom.room.getPositionAt(
-                    pathPoint.x, pathPoint.y
-                );
-                // DEBUG: left off here...
-                // if(modelRoom.room.createConstructionSite(pos, STRUCTURE_ROAD) === OK) {
-                //     return;
-                // }
-            });
-        });
+
+        // ORIGINAL IMPLEMENTATION NOT WORKING CORRECTLY
+        // paths.forEach((path) => {
+        //     path.forEach((pathPoint) => {
+        //         var pos = modelRoom.room.getPositionAt(
+        //             pathPoint.x, pathPoint.y
+        //         );
+        //         if(modelRoom.room.createConstructionSite(pos, STRUCTURE_ROAD) === OK) {
+        //             return;
+        //         }
+        //     });
+        // });
 
         // // get next available construction position from paths
         // // construct if exists
@@ -124,24 +132,31 @@ var ctrlRoad = {
     },
 
 
+    findOrCreateRoadPaths: function() {
+        var roomMem = modelRoom.room.memory;
+        if(!roomMem.roadPaths) {
+            roomMem.roadPaths = [];
+        }
+        // console.log(JSON.stringify(roomMem));
+    },
+
+
+    createNewRoadConstructionSite: function() {},
+
+
+    // NOT USED
     getNextAvailableRoadConstrPositionFromPaths: function(paths) {
-        // for path in paths:
-        //     for pos in path:
-        //         if not pos.hasStructureOrConstructionSite():
-        //             return pos
-        // return null
         paths.forEach((path) => {
             path.forEach((pathPoint) => {
-                // console.log('pathPoint: ', JSON.stringify(pathPoint));
                 var pos = modelRoom.room.getPositionAt(
                     pathPoint.x, pathPoint.y
                 );
-
             });
         });
     },
 
 
+    // NOT USED
     getNextAvailableRoadConstrPositionFromStructures: function(structures) {
         // for structure in structures:
         //     for pos in structure.getSurroundingPositions():
