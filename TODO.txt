@@ -1,8 +1,7 @@
 
 road, walls, rampart building and maintenance
-    - build road on path of haulers and upgraders (they should put down construction sites)
-    - or, take path from algo and plot roads on that
-    - or build roads based on calculated path via API
+    - build roads based on calculated path via API
+    - put only one construction site down at a time for builder creep focus
     - think about programmatic building of walls and ramparts
 
 DEFENSE, DEFENSE, DEFENSE
