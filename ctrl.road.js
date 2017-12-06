@@ -12,10 +12,15 @@ var modelTower = require('model.tower');
 var ctrlRoad = {
 
 
-    PATHS_ENERGY_SOURCES_TO_SPAWN: 1,
-    PATHS_ENERGY_SOURCES_TO_STORAGE: 2,
-    PATH_STORAGE_TO_CONTROLLER: 3,
-    PATHS_STORAGE_TO_EXITS: 4,
+    roadPaths: null,
+
+
+    pathTypes: {
+        PATHS_ENERGY_SOURCES_TO_SPAWN: 'energySourcesToSpawn',
+        PATHS_ENERGY_SOURCES_TO_STORAGE: 'energySourcesToStorage',
+        PATHS_STORAGE_TO_CONTROLLER: 'storageToController',
+        PATHS_STORAGE_TO_EXITS: 'storageToExits'
+    },
 
 
     proc: function() {
@@ -132,12 +137,43 @@ var ctrlRoad = {
     },
 
 
-    findOrCreateRoadPaths: function() {
+    findOrCreateRoadPaths: function(forceCreate) {
         var roomMem = modelRoom.room.memory;
-        if(!roomMem.roadPaths) {
-            roomMem.roadPaths = [];
+        if(this.roadPathsNeedRefresh() || forceCreate) {
+
+            roomMem.roadPaths = {};
+
+            // PATHS_ENERGY_SOURCES_TO_SPAWN: 'energySourcesToSpawn',
+            // PATHS_ENERGY_SOURCES_TO_STORAGE: 'energySourcesToStorage',
+            // PATHS_STORAGE_TO_CONTROLLER: 'storageToController',
+            // PATHS_STORAGE_TO_EXITS: 'storageToExits'
+
+            roomMem.roadPaths[this.pathTypes.PATHS_ENERGY_SOURCES_TO_SPAWN] =
+                modelEnergySources.sources.map((source) => {
+                    return modelRoom.room.findPath(
+                        source.pos,
+                        primarySpawn.pos
+                    );
+                });
+
+            // LEEFT OFF HERE...
+
+            console.log(JSON.stringify(roomMem));
+
+        } else {
+            return roomMem.roadPaths;
         }
-        // console.log(JSON.stringify(roomMem));
+    },
+
+
+    roadPathsNeedRefresh: function() {
+        var roomMem = modelRoom.room.memory;
+        if(!modelRoom.roadPaths) return true;
+        for(var name in this.pathTypes) {
+            var pathType = this.pathTypes[name];
+            if(!Array.isArray(pathType)) return true;
+        }
+        return false;
     },
 
 
@@ -145,25 +181,25 @@ var ctrlRoad = {
 
 
     // NOT USED
-    getNextAvailableRoadConstrPositionFromPaths: function(paths) {
-        paths.forEach((path) => {
-            path.forEach((pathPoint) => {
-                var pos = modelRoom.room.getPositionAt(
-                    pathPoint.x, pathPoint.y
-                );
-            });
-        });
-    },
+    // getNextAvailableRoadConstrPositionFromPaths: function(paths) {
+    //     paths.forEach((path) => {
+    //         path.forEach((pathPoint) => {
+    //             var pos = modelRoom.room.getPositionAt(
+    //                 pathPoint.x, pathPoint.y
+    //             );
+    //         });
+    //     });
+    // },
 
 
     // NOT USED
-    getNextAvailableRoadConstrPositionFromStructures: function(structures) {
-        // for structure in structures:
-        //     for pos in structure.getSurroundingPositions():
-        //         if not pos.hasStructureOrConstructionSite:
-        //             return pos
-        // return null
-    }
+    // getNextAvailableRoadConstrPositionFromStructures: function(structures) {
+    //     // for structure in structures:
+    //     //     for pos in structure.getSurroundingPositions():
+    //     //         if not pos.hasStructureOrConstructionSite:
+    //     //             return pos
+    //     // return null
+    // }
 
 
 };
