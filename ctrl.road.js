@@ -34,10 +34,18 @@ var ctrlRoad = {
 
 
     proc: function() {
+
         // find or create road paths in memory
         this.roadPaths = this.findOrCreateRoadPaths();
-        // create road construction site
-        this.createNewRoadConstructionSite();
+
+        var currRoadConstructionSites = this.getRoadConstructionSites();
+        console.log(currRoadConstructionSites);
+
+        // create road construction site if one doesn't already exist
+        if(currRoadConstructionSites.length === 0) {
+            this.createNewRoadConstructionSite();
+        }
+
     },
 
 
@@ -116,6 +124,16 @@ var ctrlRoad = {
             }
             return false
         }
+    },
+
+
+    getRoadConstructionSites: function() {
+        return _.filter(
+            modelRoom.room.find(FIND_MY_CONSTRUCTION_SITES), (site) => {
+                return site.structureType === STRUCTURE_ROAD;
+            }
+
+        );
     }
 
 
