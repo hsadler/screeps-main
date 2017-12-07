@@ -10,13 +10,13 @@ var modelTower = require('model.tower');
 // CONTROLS ROAD BEHAVIOR
 
 // roads to construct:
-            // 1. spawn -> energy sources
-            // 2. energy sources -> storage
-            // 3. storage -> controller
-            // 4. storage -> owned rooms (link rooms)
-            // 5. up, down, left, right from each extension
-            // 6. up, down, left, right from each tower
-            // 7. up, down, left, right from each spawn
+    // 1. spawn -> energy sources
+    // 2. energy sources -> storage
+    // 3. storage -> controller
+    // 4. storage -> owned rooms (link rooms)
+    // 5. up, down, left, right from each extension
+    // 6. up, down, left, right from each tower
+    // 7. up, down, left, right from each spawn
 
 
 var ctrlRoad = {
@@ -34,21 +34,14 @@ var ctrlRoad = {
 
 
     proc: function() {
-
-        // var path = modelRoom.room.findPath(
-        //     modelEnergySources.sources[0].pos,
-        //     modelEnergySources.sources[1].pos
-        // );
-        // console.log(JSON.stringify(path));
-
         // find or create road paths in memory
         this.roadPaths = this.findOrCreateRoadPaths();
         // create road construction site
         this.createNewRoadConstructionSite();
-
     },
 
 
+    // puts road paths in memory if they don't exist and returns road paths
     findOrCreateRoadPaths: function(forceCreate) {
         var roomMem = modelRoom.room.memory;
         if(this.roadPathsNeedRefresh() || forceCreate) {
@@ -93,6 +86,7 @@ var ctrlRoad = {
     },
 
 
+    // checks if we have road paths in memory
     roadPathsNeedRefresh: function() {
         var roomMem = modelRoom.room.memory;
         if(!modelRoom.roadPaths) return true;
@@ -104,7 +98,25 @@ var ctrlRoad = {
     },
 
 
-    createNewRoadConstructionSite: function() {},
+    // attempts to create road construction site based on road paths in memory
+    // returns success bool true if site created, else false
+    createNewRoadConstructionSite: function() {
+        if(this.roadPaths && Object.keys(this.roadPaths).length > 0) {
+            for(var name in this.roadPaths) {
+                var paths = this.roadPaths[name];
+                if(Array.isArray(paths) && paths.length > 0) {
+                    var pathNode = paths.pop();
+                    modelRoom.room.createConstructionSite(
+                        pathNode.x,
+                        pathNode.y,
+                        STRUCTURE_ROAD
+                    );
+                    return true;
+                }
+            }
+            return false
+        }
+    }
 
 
 };
