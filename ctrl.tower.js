@@ -58,8 +58,9 @@ var ctrlTower = {
     },
 
 
+    // TODO: change this to only my structures and roads
     getStructuresNeedingRepair: function() {
-        var structures = modelRoom.room.find(FIND_MY_STRUCTURES);
+        var structures = modelRoom.room.find(FIND_STRUCTURES);
         return _.filter(structures, (structure) => {
             return structure.hits < structure.hitsMax;
         });

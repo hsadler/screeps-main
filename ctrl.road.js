@@ -35,15 +35,13 @@ var ctrlRoad = {
 
     proc: function() {
 
+        // TODO: Add surrounding positions of extentsions and towers to list of
+        // construction sites to make. Add deduping of construction sites to make
+
         // find or create road paths in memory
         this.roadPaths = this.findOrCreateRoadPaths();
-        // console.log(JSON.stringify(this.roadPaths));
-
-        var needsRefresh = this.roadPathsNeedRefresh();
-        // console.log('needsRefresh: ', needsRefresh);
 
         var currRoadConstructionSites = this.getRoadConstructionSites();
-        // console.log('currRoadConstructionSites: ', currRoadConstructionSites.length);
 
         // create road construction site if one doesn't already exist
         if(currRoadConstructionSites.length === 0) {
@@ -116,16 +114,12 @@ var ctrlRoad = {
     createNewRoadConstructionSite: function() {
         if(this.roadPaths && Object.keys(this.roadPaths).length > 0) {
             for(var name in this.roadPaths) {
-                // console.log('name: ', name);
                 var paths = this.roadPaths[name];
-                // console.log('paths: ', paths.length);
                 if(Array.isArray(paths) && paths.length > 0) {
                     for(var i = 0; i < paths.length; i++) {
                         var path = paths[i];
-                        // console.log('path: ', path);
                         if(Array.isArray(path) && path.length > 0) {
                             var pathNode = path.pop();
-                            // console.log('pathNode: ', pathNode);
                             if(
                                 modelRoom.room.createConstructionSite(
                                     pathNode.x,

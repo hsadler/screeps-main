@@ -1,7 +1,7 @@
 
 road, walls, rampart building and maintenance
-    - build roads based on calculated path via API
-    - put only one construction site down at a time for builder creep focus
+    X build roads based on calculated path via API
+    X put only one construction site down at a time for builder creep focus
     - think about programmatic building of walls and ramparts
 
 DEFENSE, DEFENSE, DEFENSE
