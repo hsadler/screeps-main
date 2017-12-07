@@ -101,12 +101,12 @@ var ctrlSpawn = {
 
 
     shouldSpawnBuilder: function() {
-        var minPickupEnergy = 1000;
+        var minPickupEnergy = 250;
         var pickupEnergy = modelStorage.storage.store[RESOURCE_ENERGY];
         return (
             pickupEnergy > minPickupEnergy &&
             modelCreep.builders.length < conf.MAX_BUILDERS &&
-            modelRoom.room.find(FIND_CONSTRUCTION_SITES).length > 0
+            modelRoom.room.find(FIND_MY_CONSTRUCTION_SITES).length > 0
         );
     }
 

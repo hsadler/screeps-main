@@ -37,9 +37,13 @@ var ctrlRoad = {
 
         // find or create road paths in memory
         this.roadPaths = this.findOrCreateRoadPaths();
+        // console.log(JSON.stringify(this.roadPaths));
+
+        var needsRefresh = this.roadPathsNeedRefresh();
+        // console.log('needsRefresh: ', needsRefresh);
 
         var currRoadConstructionSites = this.getRoadConstructionSites();
-        console.log(currRoadConstructionSites);
+        // console.log('currRoadConstructionSites: ', currRoadConstructionSites.length);
 
         // create road construction site if one doesn't already exist
         if(currRoadConstructionSites.length === 0) {
@@ -78,7 +82,7 @@ var ctrlRoad = {
             // storage to controller
             roomMem.roadPaths[this.pathTypes.PATHS_STORAGE_TO_CONTROLLER] = [
                 modelRoom.room.findPath(
-                    modelStorage.storage.pos, modelRoom.room.controller
+                    modelStorage.storage.pos, modelRoom.room.controller.pos
                 )
             ];
 
@@ -86,7 +90,7 @@ var ctrlRoad = {
             // TODO: implement these road paths once we control multiple rooms
             roomMem.roadPaths[this.pathTypes.PATHS_STORAGE_TO_EXITS] = [];
 
-            console.log(JSON.stringify(roomMem));
+            return roomMem.roadPaths;
 
         } else {
             return roomMem.roadPaths;
@@ -97,10 +101,11 @@ var ctrlRoad = {
     // checks if we have road paths in memory
     roadPathsNeedRefresh: function() {
         var roomMem = modelRoom.room.memory;
-        if(!modelRoom.roadPaths) return true;
+        if(!roomMem.roadPaths) return true;
         for(var name in this.pathTypes) {
             var pathType = this.pathTypes[name];
-            if(!Array.isArray(pathType)) return true;
+            var paths = roomMem.roadPaths[pathType];
+            if(!Array.isArray(paths)) return true;
         }
         return false;
     },
@@ -111,15 +116,27 @@ var ctrlRoad = {
     createNewRoadConstructionSite: function() {
         if(this.roadPaths && Object.keys(this.roadPaths).length > 0) {
             for(var name in this.roadPaths) {
+                // console.log('name: ', name);
                 var paths = this.roadPaths[name];
+                // console.log('paths: ', paths.length);
                 if(Array.isArray(paths) && paths.length > 0) {
-                    var pathNode = paths.pop();
-                    modelRoom.room.createConstructionSite(
-                        pathNode.x,
-                        pathNode.y,
-                        STRUCTURE_ROAD
-                    );
-                    return true;
+                    for(var i = 0; i < paths.length; i++) {
+                        var path = paths[i];
+                        // console.log('path: ', path);
+                        if(Array.isArray(path) && path.length > 0) {
+                            var pathNode = path.pop();
+                            // console.log('pathNode: ', pathNode);
+                            if(
+                                modelRoom.room.createConstructionSite(
+                                    pathNode.x,
+                                    pathNode.y,
+                                    STRUCTURE_ROAD
+                                ) === OK
+                            ) {
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
             return false

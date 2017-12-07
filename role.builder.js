@@ -1,6 +1,7 @@
 var conf = require('conf');
 
 // models
+var modelRoom = require('model.room');
 var modelEnergySources = require('model.energy_sources');
 var modelPickupFlag = require('model.pickup_flag');
 var modelStorage = require('model.storage');
