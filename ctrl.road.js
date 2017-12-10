@@ -36,7 +36,7 @@ var ctrlRoad = {
     proc: function() {
 
         // TODO: Add surrounding positions of extentsions and towers to list of
-        // construction sites to make. Add deduping of construction sites to make
+        // construction sites.
 
         // find or create road paths in memory
         this.roadPaths = this.findOrCreateRoadPaths();
@@ -121,11 +121,11 @@ var ctrlRoad = {
                     for(var i = 0; i < paths.length; i++) {
                         var path = paths[i];
                         if(Array.isArray(path) && path.length > 0) {
-
-                            // new:
                             // each path node in path
                             for(var j = 0; j < path.length; j++) {
                                 pathNode = path[j];
+                                // short circuit if construction site
+                                // successfully created
                                 if(
                                     modelRoom.room.createConstructionSite(
                                         pathNode.x,
@@ -136,19 +136,6 @@ var ctrlRoad = {
                                     return true;
                                 }
                             }
-
-                            // old
-                            // var pathNode = path.pop();
-                            // if(
-                            //     modelRoom.room.createConstructionSite(
-                            //         pathNode.x,
-                            //         pathNode.y,
-                            //         STRUCTURE_ROAD
-                            //     ) === OK
-                            // ) {
-                            //     return true;
-                            // }
-
                         }
                     }
                 }
