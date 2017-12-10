@@ -1,15 +1,16 @@
 
 road, walls, rampart building and maintenance
     X build roads based on calculated path via API
+    - refactor road path model in room memory to persist
     X put only one construction site down at a time for builder creep focus
     - think about programmatic building of walls and ramparts
+
+programmatic extension construction site placement
+    - hardcode offset map from Spawn1
 
 DEFENSE, DEFENSE, DEFENSE
     - think about 'defense' mode
     - defense creeps with attack bodyparts
-
-programmatic extension construction site placement
-    - hardcode offset map from Spawn1
 
 analytics system - get insights into:
     - harvest/tick

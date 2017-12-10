@@ -113,22 +113,42 @@ var ctrlRoad = {
     // returns success bool true if site created, else false
     createNewRoadConstructionSite: function() {
         if(this.roadPaths && Object.keys(this.roadPaths).length > 0) {
+            // each path list in path types
             for(var name in this.roadPaths) {
                 var paths = this.roadPaths[name];
                 if(Array.isArray(paths) && paths.length > 0) {
+                    // each path in path list
                     for(var i = 0; i < paths.length; i++) {
                         var path = paths[i];
                         if(Array.isArray(path) && path.length > 0) {
-                            var pathNode = path.pop();
-                            if(
-                                modelRoom.room.createConstructionSite(
-                                    pathNode.x,
-                                    pathNode.y,
-                                    STRUCTURE_ROAD
-                                ) === OK
-                            ) {
-                                return true;
+
+                            // new:
+                            // each path node in path
+                            for(var j = 0; j < path.length; j++) {
+                                pathNode = path[j];
+                                if(
+                                    modelRoom.room.createConstructionSite(
+                                        pathNode.x,
+                                        pathNode.y,
+                                        STRUCTURE_ROAD
+                                    ) === OK
+                                ) {
+                                    return true;
+                                }
                             }
+
+                            // old
+                            // var pathNode = path.pop();
+                            // if(
+                            //     modelRoom.room.createConstructionSite(
+                            //         pathNode.x,
+                            //         pathNode.y,
+                            //         STRUCTURE_ROAD
+                            //     ) === OK
+                            // ) {
+                            //     return true;
+                            // }
+
                         }
                     }
                 }
