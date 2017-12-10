@@ -33,6 +33,11 @@ var ctrlRoad = {
     },
 
 
+    FINDPATH_OPTIONS: {
+        ignoreCreeps: true
+    },
+
+
     proc: function() {
 
         // TODO: Add surrounding positions of extentsions and towers to list of
@@ -57,6 +62,7 @@ var ctrlRoad = {
         if(this.roadPathsNeedRefresh() || forceCreate) {
 
             roomMem.roadPaths = {};
+            var findPathOpts = this.FINDPATH_OPTIONS;
 
             // energy sources to spawn
             var primarySpawn = modelSpawn.spawns[0];
@@ -64,7 +70,8 @@ var ctrlRoad = {
                 modelEnergySources.sources.map((source) => {
                     return modelRoom.room.findPath(
                         source.pos,
-                        primarySpawn.pos
+                        primarySpawn.pos,
+                        findPathOpts
                     );
                 });
 
@@ -73,14 +80,17 @@ var ctrlRoad = {
                 modelEnergySources.sources.map((source) => {
                     return modelRoom.room.findPath(
                         source.pos,
-                        modelStorage.storage.pos
+                        modelStorage.storage.pos,
+                        findPathOpts
                     );
                 });
 
             // storage to controller
             roomMem.roadPaths[this.pathTypes.PATHS_STORAGE_TO_CONTROLLER] = [
                 modelRoom.room.findPath(
-                    modelStorage.storage.pos, modelRoom.room.controller.pos
+                    modelStorage.storage.pos,
+                    modelRoom.room.controller.pos,
+                    findPathOpts
                 )
             ];
 
