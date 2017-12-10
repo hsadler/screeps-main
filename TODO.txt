@@ -1,9 +1,14 @@
 
 road, walls, rampart building and maintenance
     X build roads based on calculated path via API
-    - refactor road path model in room memory to persist
+    X refactor road path model in room memory to persist
     X put only one construction site down at a time for builder creep focus
-    - think about programmatic building of walls and ramparts
+    - optimize road existance before trying to create construction site
+
+multiple spawn bugs
+    - creating too many haulers
+
+think about programmatic building of walls and ramparts
 
 programmatic extension construction site placement
     - hardcode offset map from Spawn1
