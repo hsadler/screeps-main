@@ -134,16 +134,19 @@ var ctrlRoad = {
                             // each path node in path
                             for(var j = 0; j < path.length; j++) {
                                 pathNode = path[j];
-                                // short circuit if construction site
-                                // successfully created
-                                if(
-                                    modelRoom.room.createConstructionSite(
-                                        pathNode.x,
-                                        pathNode.y,
-                                        STRUCTURE_ROAD
-                                    ) === OK
-                                ) {
-                                    return true;
+                                if(!pathNode.roadConstructed) {
+                                    // short circuit if construction site
+                                    // successfully created
+                                    if(
+                                        modelRoom.room.createConstructionSite(
+                                            pathNode.x,
+                                            pathNode.y,
+                                            STRUCTURE_ROAD
+                                        ) === OK
+                                    ) {
+                                        pathNode.roadConstructed = true;
+                                        return true;
+                                    }
                                 }
                             }
                         }
