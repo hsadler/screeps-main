@@ -3,10 +3,11 @@ road, walls, rampart building and maintenance
     X build roads based on calculated path via API
     X refactor road path model in room memory to persist
     X put only one construction site down at a time for builder creep focus
-    - optimize road existance before trying to create construction site
+    X optimize road existance before trying to create construction site
 
 multiple spawn bugs
     - creating too many haulers
+    - creating too many miners
 
 think about programmatic building of walls and ramparts
 
